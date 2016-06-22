@@ -194,99 +194,246 @@ describe('find the least popular products sold each week', function() {
     });
 });
 ///////////////////////categoryData//////////////////////////////////////////////////
-var one = { Dairy: 69,
-  Grains: 84,
-  Canned: 23,
-  canned: 17,
-  Drinks: 109,
-  'Personal Care': 15,
-  Fruit: 83
+var one = {
+    Dairy: 69,
+    Grains: 84,
+    Canned: 23,
+    canned: 17,
+    Drinks: 109,
+    'Personal Care': 15,
+    Fruit: 83
 };
-var two = { Dairy: 64,
-  Grains: 59,
-  Canned: 21,
-  canned: 27,
-  Drinks: 87,
-  'Personal Care': 11,
-  Fruit: 49,
-  'Sugar-Candy': 74,
-  'Gifts and Cards': 28
+var two = {
+    Dairy: 64,
+    Grains: 59,
+    Canned: 21,
+    canned: 27,
+    Drinks: 87,
+    'Personal Care': 11,
+    Fruit: 49,
+    'Sugar-Candy': 74,
+    'Gifts and Cards': 28
 };
-var three = { Dairy: 53,
-  Grains: 40,
-  Canned: 17,
-  canned: 8,
-  Drinks: 44,
-  'Personal Care': 12,
-  Fruit: 42
+var three = {
+    Dairy: 53,
+    Grains: 40,
+    Canned: 17,
+    canned: 8,
+    Drinks: 44,
+    'Personal Care': 12,
+    Fruit: 42
 };
-var four = { Dairy: 77,
-  Grains: 92,
-  Canned: 33,
-  canned: 34,
-  Drinks: 88,
-  'Personal Care': 38,
-  Fruit: 54
+var four = {
+    Dairy: 77,
+    Grains: 92,
+    Canned: 33,
+    canned: 34,
+    Drinks: 88,
+    'Personal Care': 38,
+    Fruit: 54
 
 };
 /////////////////////////////most category///////////////////////////////////
-describe('find the most popular category sold each week',function(){
-  it('should tell the most popular category sold for week1',function(){
-    var products = nelisaProducts.category(product1);
-    assert.deepEqual(products,
-      { category: 'Drinks', quantity: 109 });
-  });
+describe('find the most popular category sold each week', function() {
+    it('should tell the most popular category sold for week1', function() {
+        var products = nelisaProducts.category(product1);
+        assert.deepEqual(products, {
+            category: 'Drinks',
+            quantity: 109
+        });
+    });
 
-  it('should tell the most popular category sold for week2',function(){
-    var products = nelisaProducts.category(product2);
-    assert.deepEqual(products,
-      { category: 'Drinks', quantity: 87 } );
-  });
+    it('should tell the most popular category sold for week2', function() {
+        var products = nelisaProducts.category(product2);
+        assert.deepEqual(products, {
+            category: 'Drinks',
+            quantity: 87
+        });
+    });
 
-    it('the most popular category sold for week3',function(){
-    var products = nelisaProducts.category(product3);
-    assert.deepEqual(products,
-      { category: 'Dairy', quantity: 53 });
-  });
+    it('the most popular category sold for week3', function() {
+        var products = nelisaProducts.category(product3);
+        assert.deepEqual(products, {
+            category: 'Dairy',
+            quantity: 53
+        });
+    });
 
-it('the most popular category sold for week4',function(){
-  var products = nelisaProducts.category(product4);
-  assert.deepEqual(products,
-    { category: 'Grains', quantity: 92 } );
-});
+    it('the most popular category sold for week4', function() {
+        var products = nelisaProducts.category(product4);
+        assert.deepEqual(products, {
+            category: 'Grains',
+            quantity: 92
+        });
+    });
 });
 ////////////////leastCategory///////////////////////////////////////
-describe('find the least popular category sold each week',function(){
-  it('find the least popular category sold for week1',function(){
-    var products = nelisaProducts.least(one);
-    assert.deepEqual(products,
-      { category: 'Personal Care', quantity: 15 }
-  );
-  });
-  it('find the least popular category sold for week2',function(){
-    var products = nelisaProducts.least(two);
-    assert.deepEqual(products,{ category: 'Personal Care', quantity: 11 })
-  });
-  it('find the least popular category sold for week3',function(){
-    var products = nelisaProducts.least(three);
-    assert.deepEqual(products,{ category: 'canned', quantity: 8 }
-);
-  });
-  it('find the least popular category sold for week4',function(){
-  var products = nelisaProducts.least(four);
-  assert.deepEqual(products, { category: 'Canned', quantity: 33 });
-  });
+describe('find the least popular category sold each week', function() {
+    it('find the least popular category sold for week1', function() {
+        var products = nelisaProducts.least(one);
+        assert.deepEqual(products, {
+            category: 'Personal Care',
+            quantity: 15
+        });
+    });
+    it('find the least popular category sold for week2', function() {
+        var products = nelisaProducts.least(two);
+        assert.deepEqual(products, {
+            category: 'Personal Care',
+            quantity: 11
+        })
+    });
+    it('find the least popular category sold for week3', function() {
+        var products = nelisaProducts.least(three);
+        assert.deepEqual(products, {
+            category: 'canned',
+            quantity: 8
+        });
+    });
+    it('find the least popular category sold for week4', function() {
+        var products = nelisaProducts.least(four);
+        assert.deepEqual(products, {
+            category: 'Canned',
+            quantity: 33
+        });
+    });
 });
-///////////////////////////////////////////////////////////////////////
-describe('show the data for purchase',function(){
-it('should show the length of purchases',function(){
-var products = nelisaPurchases.sales('./data/purchases.csv');
-assert.equal(products.length,153);
-});
-it('should show the group data of purchase',function(){
-  var listPurchase = nelisaPurchases.sales('./data/purchases.csv')
-  var products = nelisaPurchases.groupPurchasing(listPurchase);
-  assert.deepEqual(products,purchase1);
-});
+// ////////////////////groupPurchasing//////////////////////////////////////
+var weekly1 = ['1-Feb','2-Feb','3-Feb','4-Feb','5-Feb','6-Feb','7-Feb'];
+var weekly2 = ['8-Feb','9-Feb','10-Feb','11-Feb','12-Feb','13-Feb','14-Feb'];
+var weekly3 = ['15-Feb','16-Feb','17-Feb','18-Feb','19-Feb','20-Feb','21-Feb'];
+var weekly4 =['22-Feb','23-Feb','24-Feb','25-Feb','26-Feb','27-Feb','28-Feb','1-Mar'];
 
-});
+describe('show the data for purchase', function() {
+    it('should show the length of purchases', function() {
+        var products = nelisaPurchases.sales('./data/purchases.csv');
+        assert.equal(products.length, 153);
+    });
+    it('split the purchases by week for week1',function(){
+      var products = nelisaPurchases.purchasesWeeks('./data/purchases.csv',weekly1);
+      assert.equal(products,46);
+    });
+    });
+
+// var purchase1 = {
+//     'Chakalaka Can': 676,
+//     'Coke 500ml': 598.5,
+//     'Cream Soda 500ml': 357,
+//     'Fanta 500ml': 433.5,
+//     'Gold Dish Vegetable Curry Can': 479,
+//     Imasi: 2238,
+//     'Iwisa Pap 5kg': 1020,
+//     'Milk 1l': 1061.5,
+//     'Top Class Soy Mince': 808,
+//     'Bananas - loose': 72,
+//     'Apples - loose': 795,
+//     'Mixed Sweets 5s': 2070,
+//     'Shampoo 1 litre': 520,
+//     'Soap Bar': 156,
+//     Bread: 1270,
+//     'Rose (plastic)': 200,
+//     'Heart Chocolates': 500,
+//     'Valentine Cards': 40
+// };
+// var weekly1 = {
+//     'Milk 1l': 390,
+//     Imasi: 750,
+//     Bread: 540,
+//     'Chakalaka Can': 230,
+//     'Gold Dish Vegetable Curry Can': 153,
+//     'Fanta 500ml': 214.5,
+//     'Coke 500ml': 351,
+//     'Cream Soda 500ml': 165,
+//     'Iwisa Pap 5kg': 510,
+//     'Top Class Soy Mince': 264,
+//     'Shampoo 1 litre': 90,
+//     'Soap Bar': 72,
+//     'Bananas - loose': 94,
+//     'Apples - loose': 72,
+//     'Mixed Sweets 5s': 120
+// }
+// var weekly2 = {
+//     Imasi: 900,
+//     Bread: 336,
+//     'Chakalaka Can': 210,
+//     'Gold Dish Vegetable Curry Can': 243,
+//     'Fanta 500ml': 149.5,
+//     'Coke 500ml': 273,
+//     'Cream Soda 500ml': 165,
+//     'Iwisa Pap 5kg': 300,
+//     'Top Class Soy Mince': 252,
+//     'Shampoo 1 litre': 180,
+//     'Soap Bar': 30,
+//     'Bananas - loose': 56,
+//     'Apples - loose': 42,
+//     'Mixed Sweets 5s': 147,
+//     'Milk 1l': 280,
+//     'Heart Chocolates': 700,
+//     'Rose (plastic)': 210,
+//     'Valentine Cards': 56
+// }
+// var weekly3 = {
+//     Imasi: 625,
+//     Bread: 288,
+//     'Chakalaka Can': 170,
+//     'Gold Dish Vegetable Curry Can': 72,
+//     'Fanta 500ml': 91,
+//     'Coke 500ml': 117,
+//     'Cream Soda 500ml': 90,
+//     'Iwisa Pap 5kg': 120,
+//     'Top Class Soy Mince': 144,
+//     'Shampoo 1 litre': 120,
+//     'Soap Bar': 48,
+//     'Bananas - loose': 34,
+//     'Apples - loose': 50,
+//     'Mixed Sweets 5s': 80,
+//     'Milk 1l': 280
+// }
+// var weekly4 = {
+//     Imasi: 850,
+//     Bread: 396,
+//     'Chakalaka Can': 330,
+//     'Gold Dish Vegetable Curry Can': 306,
+//     'Fanta 500ml': 156,
+//     'Coke 500ml': 292.5,
+//     'Cream Soda 500ml': 142.5,
+//     'Iwisa Pap 5kg': 480,
+//     'Top Class Soy Mince': 516,
+//     'Shampoo 1 litre': 390,
+//     'Soap Bar': 150,
+//     'Bananas - loose': 44,
+//     'Apples - loose': 64,
+//     'Mixed Sweets 5s': 108,
+//     'Milk 1l': 430
+// };
+// /////////////////groupPurchasing.csv\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+ ///////////////////////////groupWeeks.csv///////////////////////////////////////
+//     it('should show the group data of week2', function() {
+//         var listProduct = nelisaProducts.linesInFiles('./data/week2.csv')
+//         var products = nelisaProducts.profitable(listProduct);
+//         assert.deepEqual(products, weekly2);
+//     });
+//     it('should show the group data of week1', function() {
+//         var listProduct = nelisaProducts.linesInFiles('./data/week1.csv');
+//         var products = nelisaProducts.profitable(listProduct);
+//         assert.deepEqual(products, weekly1);
+//     });
+//     it('should show the group data of week3', function() {
+//         var listProduct = nelisaProducts.linesInFiles('./data/week3.csv');
+//         var products = nelisaProducts.profitable(listProduct);
+//         assert.deepEqual(products, weekly3);
+//     });
+//     it('should show the group data of week4', function() {
+//         var listProduct = nelisaProducts.linesInFiles('./data/week4.csv');
+//         var products = nelisaProducts.profitable(listProduct);
+//         assert.deepEqual(products, weekly4);
+//     });
+// });
+// describe('find the profitable product for weeks',function() {
+//     it('should tell the profitable for week1', function() {
+//         var products = nelisaPurchases.mostProfit(weekly1,purchase1);
+//     //  console.log(products);
+//         assert.equal(products,djdj);
+//     });
+// });

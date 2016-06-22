@@ -1,4 +1,5 @@
 var fs = require('fs');
+// var fs = require('handler');
 
 exports.linesInFiles = function(filePath) {
     var filesInFolder = fs.readFileSync(filePath, 'utf-8');
@@ -14,9 +15,11 @@ exports.linesInFiles = function(filePath) {
     var productList = newArray.map(function(set) {
         return {
             item: set [2],
-            quantity: Number(set[3])
+            quantity: Number(set[3]),
+            salesPrice: Number(set[4].replace('R',''))
         }
     });
+    // console.log(productList);
     return productList;
 };
 exports.groupingData = function(productList) {
@@ -29,7 +32,7 @@ exports.groupingData = function(productList) {
         };
         productTotal[item] = productTotal[item] + Number(quantity);
     });
-    // console.log(productTotal);
+    //  console.log(productTotal);
     return productTotal;
 };
 
@@ -90,22 +93,15 @@ exports.category = function(productTotal) {
     };
 
     var productCategory = {};
-
     for (var stock in myCategories) {
         var food = myCategories[stock];
         var quantity = productTotal[stock];
-        //     console.log(food);
-
-
-
-
         if (!productCategory.hasOwnProperty(food)) {
             productCategory[food] = 0;
-
         }
         productCategory[food] += quantity;
     }
-    console.log(productCategory);
+    // console.log(productCategory);
 
     var max = 0;
     var mostCategory = {};
@@ -127,13 +123,26 @@ exports.least = function(productCategory){
   for (var key in productCategory) {
     if (productCategory[key] < min) {
     min = productCategory[key];
-    // console.log(productCategory[key]);
     leastCategory = {
       category: key,
       quantity: min
     }
     }
   }
-  console.log(leastCategory);
+  // console.log(leastCategory);
   return leastCategory;
 };
+exports.profitable = function(productList){
+   var totalWeekly = {};
+   productList.forEach(function(solid){
+     var item = solid.item;
+     var quantity = solid.quantity;
+     var salesPrice = solid.salesPrice * solid.quantity;
+     if(totalWeekly[item]=== undefined){
+       totalWeekly[item] = 0;
+     }
+     totalWeekly[item]+= Number(salesPrice) ;
+   });
+   console.log(totalWeekly);
+   return totalWeekly;
+}
