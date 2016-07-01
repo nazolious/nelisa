@@ -1,5 +1,4 @@
 var fs = require('fs');
-// var fs = require('handler');
 
 exports.linesInFiles = function(filePath) {
     var filesInFolder = fs.readFileSync(filePath, 'utf-8');
@@ -96,6 +95,7 @@ exports.category = function(productTotal) {
     for (var stock in myCategories) {
         var food = myCategories[stock];
         var quantity = productTotal[stock];
+        // console.log(productTotal[stock]);
         if (!productCategory.hasOwnProperty(food)) {
             productCategory[food] = 0;
         }
@@ -132,17 +132,3 @@ exports.least = function(productCategory){
   // console.log(leastCategory);
   return leastCategory;
 };
-exports.profitable = function(productList){
-   var totalWeekly = {};
-   productList.forEach(function(solid){
-     var item = solid.item;
-     var quantity = solid.quantity;
-     var salesPrice = solid.salesPrice * solid.quantity;
-     if(totalWeekly[item]=== undefined){
-       totalWeekly[item] = 0;
-     }
-     totalWeekly[item]+= Number(salesPrice) ;
-   });
-   console.log(totalWeekly);
-   return totalWeekly;
-}
