@@ -1,7 +1,6 @@
 var nelisaPurchases = require('../nelisaPurchases');
 var assert = require('assert');
 var nelisaProducts = require('../nelisaProducts');
-var profitable = require('../profitable');
 
 var weekly1 = new Date('7-Feb');
 var weekly2 = new Date('14-Feb');
@@ -9,266 +8,768 @@ var weekly3 = new Date('21-Feb');
 var weekly4 = new Date('1-Mar');
 var weekly0 = new Date('28-Jan');
 
-var inputWeek = nelisaPurchases.sales('./data/purchases.csv');
-
-describe('show the data for purchase', function() {
-    it('split the purchases by week for week1', function() {
-        var purchases = nelisaPurchases.purchasesWeeks(inputWeek, weekly1, weekly0);
-        assert.equal(purchases['nelisaWeek1'].length, 23);
+describe('filter the data', function() {
+    it('should filter the data for purchases file', function() {
+        var inputWeek = nelisaPurchases.sales('./data/purchases.csv');
+        assert.equal(inputWeek.length, 153);
     });
-    it('split the purchases by week for week2', function() {
-        var purchases = nelisaPurchases.purchasesWeeks(inputWeek, weekly2, weekly1);
-        assert.equal(purchases['nelisaWeek2'].length, 30);
-    });
+    it('should split the purchases by week for week1', function() {
+        var inputWeek = nelisaPurchases.sales('./data/purchases.csv')
+        var inputWeek1 = nelisaPurchases.splittingPurchases(inputWeek, weekly1, weekly0);
+        assert.deepEqual(inputWeek1, splitInput1);
+    })
+    it('should split the purchases by week for week2', function() {
+        var inputWeek = nelisaPurchases.sales('./data/purchases.csv')
+        var inputWeek1 = nelisaPurchases.splittingPurchases(inputWeek, weekly2, weekly1);
+        assert.deepEqual(inputWeek1, splitInput2);
+    })
     it('split the purchases by week for week3', function() {
-        var purchases = nelisaPurchases.purchasesWeeks(inputWeek, weekly3, weekly2);
-        assert.equal(purchases['nelisaWeek3'].length, 32);
+        var inputWeek = nelisaPurchases.sales('./data/purchases.csv')
+        var purchases = nelisaPurchases.splittingPurchases(inputWeek, weekly3, weekly2);
+        assert.deepEqual(purchases, splitInput3);
     });
     it('split the purchases by week for week4', function() {
-        var purchases = nelisaPurchases.purchasesWeeks(inputWeek, weekly4, weekly3);
-        assert.equal(purchases['nelisaWeek4'].length, 44);
-    });
-    var week1Purchases = nelisaPurchases.purchasesWeeks(inputWeek, weekly1, weekly0);
-    var week2Purchases = nelisaPurchases.purchasesWeeks(inputWeek, weekly2, weekly1);
-    var week3Purchases = nelisaPurchases.purchasesWeeks(inputWeek, weekly3, weekly2);
-    var week4Purchases = nelisaPurchases.purchasesWeeks(inputWeek, weekly4, weekly3);
-    var productList = nelisaProducts.linesInFiles('./data/week1.csv');
-    var productList1 = nelisaProducts.linesInFiles('./data/week2.csv');
-    var productList2 = nelisaProducts.linesInFiles('./data/week3.csv');
-    var productList3 = nelisaProducts.linesInFiles('./data/week4.csv');
+        var inputWeek = nelisaPurchases.sales('./data/purchases.csv')
+        var purchases = nelisaPurchases.splittingPurchases(inputWeek, weekly4, weekly3);
+        assert.deepEqual(purchases, splitInput4);
+    })
+});
+var splitInput1 = [{
+    Shop: 'HomeMade',
+    dates: '02-Feb',
+    Items: 'Shampoo 1 litre',
+    Cost: 20
+}, {
+    Shop: 'HomeMade',
+    dates: '02-Feb',
+    Items: 'Soap Bar',
+    Cost: 3
+}, {
+    Shop: 'Epping Market',
+    dates: '03-Feb',
+    Items: 'Bananas - loose',
+    Cost: 1
+}, {
+    Shop: 'Epping Market',
+    dates: '03-Feb',
+    Items: 'Apples - loose',
+    Cost: 1.5
+}, {
+    Shop: 'Epping Market',
+    dates: '03-Feb',
+    Items: 'Mixed Sweets 5s',
+    Cost: 3
+}, {
+    Shop: 'HomeMade',
+    dates: '04-Feb',
+    Items: 'Shampoo 1 litre',
+    Cost: 20
+}, {
+    Shop: 'HomeMade',
+    dates: '04-Feb',
+    Items: 'Soap Bar',
+    Cost: 3
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '04-Feb',
+    Items: 'Bread',
+    Cost: 11
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '04-Feb',
+    Items: 'Imasi',
+    Cost: 24
+}, {
+    Shop: 'Epping Market',
+    dates: '06-Feb',
+    Items: 'Bananas - loose',
+    Cost: 1
+}, {
+    Shop: 'Epping Market',
+    dates: '06-Feb',
+    Items: 'Apples - loose',
+    Cost: 1.5
+}, {
+    Shop: 'Epping Market',
+    dates: '06-Feb',
+    Items: 'Mixed Sweets 5s',
+    Cost: 3
+}, {
+    Shop: 'HomeMade',
+    dates: '06-Feb',
+    Items: 'Soap Bar',
+    Cost: 3
+}, {
+    Shop: 'Makro',
+    dates: '6-Feb',
+    Items: 'Bread',
+    Cost: 9
+}, {
+    Shop: 'Makro',
+    dates: '6-Feb',
+    Items: 'Chakalaka Can',
+    Cost: 7
+}, {
+    Shop: 'Makro',
+    dates: '6-Feb',
+    Items: 'Coke 500ml',
+    Cost: 3.5
+}, {
+    Shop: 'Makro',
+    dates: '6-Feb',
+    Items: 'Cream Soda 500ml',
+    Cost: 4.5
+}, {
+    Shop: 'Makro',
+    dates: '6-Feb',
+    Items: 'Fanta 500ml',
+    Cost: 4.5
+}, {
+    Shop: 'Makro',
+    dates: '6-Feb',
+    Items: 'Gold Dish Vegetable Curry Can',
+    Cost: 5
+}, {
+    Shop: 'Makro',
+    dates: '6-Feb',
+    Items: 'Imasi',
+    Cost: 17
+}, {
+    Shop: 'Makro',
+    dates: '6-Feb',
+    Items: 'Iwisa Pap 5kg',
+    Cost: 20
+}, {
+    Shop: 'Makro',
+    dates: '6-Feb',
+    Items: 'Milk 1l',
+    Cost: 7
+}, {
+    Shop: 'Makro',
+    dates: '6-Feb',
+    Items: 'Top Class Soy Mince',
+    Cost: 8
+}];
+var splitInput2 = [{
+    Shop: 'ChinaTown',
+    dates: '09-Feb',
+    Items: 'Rose (plastic)',
+    Cost: 10
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '09-Feb',
+    Items: 'Milk 1l',
+    Cost: 9.5
+}, {
+    Shop: 'Epping Market',
+    dates: '10-Feb',
+    Items: 'Bananas - loose',
+    Cost: 1
+}, {
+    Shop: 'Epping Market',
+    dates: '10-Feb',
+    Items: 'Apples - loose',
+    Cost: 1.5
+}, {
+    Shop: 'Epping Market',
+    dates: '10-Feb',
+    Items: 'Mixed Sweets 5s',
+    Cost: 3
+}, {
+    Shop: 'Makro',
+    dates: '10-Feb',
+    Items: 'Bread',
+    Cost: 9
+}, {
+    Shop: 'Makro',
+    dates: '10-Feb',
+    Items: 'Chakalaka Can',
+    Cost: 7
+}, {
+    Shop: 'Makro',
+    dates: '10-Feb',
+    Items: 'Coke 500ml',
+    Cost: 3.5
+}, {
+    Shop: 'Makro',
+    dates: '10-Feb',
+    Items: 'Gold Dish Vegetable Curry Can',
+    Cost: 5
+}, {
+    Shop: 'Makro',
+    dates: '10-Feb',
+    Items: 'Heart Chocolates',
+    Cost: 25
+}, {
+    Shop: 'Makro',
+    dates: '10-Feb',
+    Items: 'Imasi',
+    Cost: 17
+}, {
+    Shop: 'Makro',
+    dates: '10-Feb',
+    Items: 'Iwisa Pap 5kg',
+    Cost: 20
+}, {
+    Shop: 'Makro',
+    dates: '10-Feb',
+    Items: 'Milk 1l',
+    Cost: 7
+}, {
+    Shop: 'Makro',
+    dates: '10-Feb',
+    Items: 'Top Class Soy Mince',
+    Cost: 8
+}, {
+    Shop: 'HomeMade',
+    dates: '11-Feb',
+    Items: 'Shampoo 1 litre',
+    Cost: 20
+}, {
+    Shop: 'HomeMade',
+    dates: '11-Feb',
+    Items: 'Valentine Cards',
+    Cost: 2
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '12-Feb',
+    Items: 'Milk 1l',
+    Cost: 9.5
+}, {
+    Shop: 'Epping Market',
+    dates: '13-Feb',
+    Items: 'Bananas - loose',
+    Cost: 1
+}, {
+    Shop: 'Epping Market',
+    dates: '13-Feb',
+    Items: 'Mixed Sweets 5s',
+    Cost: 3
+}, {
+    Shop: 'HomeMade',
+    dates: '13-Feb',
+    Items: 'Shampoo 1 litre',
+    Cost: 20
+}, {
+    Shop: 'HomeMade',
+    dates: '13-Feb',
+    Items: 'Soap Bar',
+    Cost: 3
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '13-Feb',
+    Items: 'Gold Dish Vegetable Curry Can',
+    Cost: 8.5
+}, {
+    Shop: 'Makro',
+    dates: '13-Feb',
+    Items: 'Bread',
+    Cost: 9
+}, {
+    Shop: 'Makro',
+    dates: '13-Feb',
+    Items: 'Coke 500ml',
+    Cost: 3.5
+}, {
+    Shop: 'Makro',
+    dates: '13-Feb',
+    Items: 'Fanta 500ml',
+    Cost: 4.5
+}, {
+    Shop: 'Makro',
+    dates: '13-Feb',
+    Items: 'Imasi',
+    Cost: 17
+}, {
+    Shop: 'Makro',
+    dates: '13-Feb',
+    Items: 'Milk 1l',
+    Cost: 7
+}, {
+    Shop: 'Makro',
+    dates: '13-Feb',
+    Items: 'Top Class Soy Mince',
+    Cost: 8
+}, {
+    Shop: 'HomeMade',
+    dates: '14-Feb',
+    Items: 'Shampoo 1 litre',
+    Cost: 20
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '14-Feb',
+    Items: 'Gold Dish Vegetable Curry Can',
+    Cost: 8.5
+}]
+var splitInput3 = [{
+    Shop: 'Joe Spaza Shop',
+    dates: '16-Feb',
+    Items: 'Chakalaka Can',
+    Cost: 8.5
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '16-Feb',
+    Items: 'Cream Soda 500ml',
+    Cost: 7.5
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '16-Feb',
+    Items: 'Fanta 500ml',
+    Cost: 6.5
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '16-Feb',
+    Items: 'Gold Dish Vegetable Curry Can',
+    Cost: 8.5
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '16-Feb',
+    Items: 'Iwisa Pap 5kg',
+    Cost: 30
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '16-Feb',
+    Items: 'Milk 1l',
+    Cost: 9.5
+}, {
+    Shop: 'Epping Market',
+    dates: '17-Feb',
+    Items: 'Apples - loose',
+    Cost: 1.5
+}, {
+    Shop: 'Epping Market',
+    dates: '17-Feb',
+    Items: 'Mixed Sweets 5s',
+    Cost: 3
+}, {
+    Shop: 'Makro',
+    dates: '17-Feb',
+    Items: 'Bread',
+    Cost: 9
+}, {
+    Shop: 'Makro',
+    dates: '17-Feb',
+    Items: 'Chakalaka Can',
+    Cost: 7
+}, {
+    Shop: 'Makro',
+    dates: '17-Feb',
+    Items: 'Coke 500ml',
+    Cost: 3.5
+}, {
+    Shop: 'Makro',
+    dates: '17-Feb',
+    Items: 'Cream Soda 500ml',
+    Cost: 4.5
+}, {
+    Shop: 'Makro',
+    dates: '17-Feb',
+    Items: 'Fanta 500ml',
+    Cost: 4.5
+}, {
+    Shop: 'Makro',
+    dates: '17-Feb',
+    Items: 'Gold Dish Vegetable Curry Can',
+    Cost: 5
+}, {
+    Shop: 'Makro',
+    dates: '17-Feb',
+    Items: 'Imasi',
+    Cost: 17
+}, {
+    Shop: 'Makro',
+    dates: '17-Feb',
+    Items: 'Iwisa Pap 5kg',
+    Cost: 20
+}, {
+    Shop: 'Makro',
+    dates: '17-Feb',
+    Items: 'Milk 1l',
+    Cost: 7
+}, {
+    Shop: 'Makro',
+    dates: '17-Feb',
+    Items: 'Top Class Soy Mince',
+    Cost: 8
+}, {
+    Shop: 'HomeMade',
+    dates: '18-Feb',
+    Items: 'Shampoo 1 litre',
+    Cost: 20
+}, {
+    Shop: 'HomeMade',
+    dates: '18-Feb',
+    Items: 'Soap Bar',
+    Cost: 3
+}, {
+    Shop: 'HomeMade',
+    dates: '19-Feb',
+    Items: 'Shampoo 1 litre',
+    Cost: 20
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '19-Feb',
+    Items: 'Milk 1l',
+    Cost: 9.5
+}, {
+    Shop: 'Epping Market',
+    dates: '20-Feb',
+    Items: 'Bananas - loose',
+    Cost: 1
+}, {
+    Shop: 'Epping Market',
+    dates: '20-Feb',
+    Items: 'Apples - loose',
+    Cost: 1.5
+}, {
+    Shop: 'Epping Market',
+    dates: '20-Feb',
+    Items: 'Mixed Sweets 5s',
+    Cost: 3
+}, {
+    Shop: 'HomeMade',
+    dates: '20-Feb',
+    Items: 'Shampoo 1 litre',
+    Cost: 20
+}, {
+    Shop: 'HomeMade',
+    dates: '20-Feb',
+    Items: 'Soap Bar',
+    Cost: 3
+}, {
+    Shop: 'Makro',
+    dates: '20-Feb',
+    Items: 'Bread',
+    Cost: 9
+}, {
+    Shop: 'Makro',
+    dates: '20-Feb',
+    Items: 'Imasi',
+    Cost: 17
+}, {
+    Shop: 'Makro',
+    dates: '20-Feb',
+    Items: 'Iwisa Pap 5kg',
+    Cost: 20
+}, {
+    Shop: 'Makro',
+    dates: '20-Feb',
+    Items: 'Milk 1l',
+    Cost: 7
+}, {
+    Shop: 'Makro',
+    dates: '20-Feb',
+    Items: 'Top Class Soy Mince',
+    Cost: 8
+}]
+var splitInput4 = [{
+    Shop: 'Joe Spaza Shop',
+    dates: '23-Feb',
+    Items: 'Chakalaka Can',
+    Cost: 9
+}, {
+    Shop: 'Epping Market',
+    dates: '24-Feb',
+    Items: 'Bananas - loose',
+    Cost: 1
+}, {
+    Shop: 'Epping Market',
+    dates: '24-Feb',
+    Items: 'Apples - loose',
+    Cost: 1.5
+}, {
+    Shop: 'Epping Market',
+    dates: '24-Feb',
+    Items: 'Mixed Sweets 5s',
+    Cost: 3
+}, {
+    Shop: 'Makro',
+    dates: '24-Feb',
+    Items: 'Bread',
+    Cost: 9
+}, {
+    Shop: 'Makro',
+    dates: '24-Feb',
+    Items: 'Chakalaka Can',
+    Cost: 7
+}, {
+    Shop: 'Makro',
+    dates: '24-Feb',
+    Items: 'Coke 500ml',
+    Cost: 3.5
+}, {
+    Shop: 'Makro',
+    dates: '24-Feb',
+    Items: 'Cream Soda 500ml',
+    Cost: 4.5
+}, {
+    Shop: 'Makro',
+    dates: '24-Feb',
+    Items: 'Fanta 500ml',
+    Cost: 4.5
+}, {
+    Shop: 'Makro',
+    dates: '24-Feb',
+    Items: 'Gold Dish Vegetable Curry Can',
+    Cost: 5
+}, {
+    Shop: 'Makro',
+    dates: '24-Feb',
+    Items: 'Imasi',
+    Cost: 17
+}, {
+    Shop: 'Makro',
+    dates: '24-Feb',
+    Items: 'Milk 1l',
+    Cost: 7
+}, {
+    Shop: 'Makro',
+    dates: '24-Feb',
+    Items: 'Top Class Soy Mince',
+    Cost: 8
+}, {
+    Shop: 'HomeMade',
+    dates: '25-Feb',
+    Items: 'Soap Bar',
+    Cost: 3
+}, {
+    Shop: 'HomeMade',
+    dates: '26-Feb',
+    Items: 'Shampoo 1 litre',
+    Cost: 20
+}, {
+    Shop: 'HomeMade',
+    dates: '26-Feb',
+    Items: 'Soap Bar',
+    Cost: 3
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '26-Feb',
+    Items: 'Bread',
+    Cost: 11
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '26-Feb',
+    Items: 'Fanta 500ml',
+    Cost: 6.5
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '26-Feb',
+    Items: 'Gold Dish Vegetable Curry Can',
+    Cost: 8.5
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '26-Feb',
+    Items: 'Iwisa Pap 5kg',
+    Cost: 30
+}, {
+    Shop: 'Epping Market',
+    dates: '27-Feb',
+    Items: 'Bananas - loose',
+    Cost: 1
+}, {
+    Shop: 'Epping Market',
+    dates: '27-Feb',
+    Items: 'Apples - loose',
+    Cost: 1.5
+}, {
+    Shop: 'HomeMade',
+    dates: '27-Feb',
+    Items: 'Shampoo 1 litre',
+    Cost: 20
+}, {
+    Shop: 'HomeMade',
+    dates: '27-Feb',
+    Items: 'Soap Bar',
+    Cost: 3
+}, {
+    Shop: 'Makro',
+    dates: '27-Feb',
+    Items: 'Bread',
+    Cost: 9
+}, {
+    Shop: 'Makro',
+    dates: '27-Feb',
+    Items: 'Chakalaka Can',
+    Cost: 7
+}, {
+    Shop: 'Makro',
+    dates: '27-Feb',
+    Items: 'Coke 500ml',
+    Cost: 3.5
+}, {
+    Shop: 'Makro',
+    dates: '27-Feb',
+    Items: 'Cream Soda 500ml',
+    Cost: 4.5
+}, {
+    Shop: 'Makro',
+    dates: '27-Feb',
+    Items: 'Fanta 500ml',
+    Cost: 4.5
+}, {
+    Shop: 'Makro',
+    dates: '27-Feb',
+    Items: 'Gold Dish Vegetable Curry Can',
+    Cost: 5
+}, {
+    Shop: 'Makro',
+    dates: '27-Feb',
+    Items: 'Imasi',
+    Cost: 17
+}, {
+    Shop: 'Makro',
+    dates: '27-Feb',
+    Items: 'Iwisa Pap 5kg',
+    Cost: 20
+}, {
+    Shop: 'Makro',
+    dates: '27-Feb',
+    Items: 'Milk 1l',
+    Cost: 7
+}, {
+    Shop: 'Makro',
+    dates: '27-Feb',
+    Items: 'Top Class Soy Mince',
+    Cost: 8
+}, {
+    Shop: 'HomeMade',
+    dates: '28-Feb',
+    Items: 'Shampoo 1 litre',
+    Cost: 20
+}, {
+    Shop: 'HomeMade',
+    dates: '28-Feb',
+    Items: 'Soap Bar',
+    Cost: 3
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '28-Feb',
+    Items: 'Chakalaka Can',
+    Cost: 8.5
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '28-Feb',
+    Items: 'Gold Dish Vegetable Curry Can',
+    Cost: 8.5
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '28-Feb',
+    Items: 'Top Class Soy Mince',
+    Cost: 11
+}, {
+    Shop: 'HomeMade',
+    dates: '01-Mar',
+    Items: 'Shampoo 1 litre',
+    Cost: 20
+}, {
+    Shop: 'HomeMade',
+    dates: '01-Mar',
+    Items: 'Soap Bar',
+    Cost: 3
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '01-Mar',
+    Items: 'Chakalaka Can',
+    Cost: 8.5
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '01-Mar',
+    Items: 'Gold Dish Vegetable Curry Can',
+    Cost: 8.5
+}, {
+    Shop: 'Joe Spaza Shop',
+    dates: '01-Mar',
+    Items: 'Top Class Soy Mince',
+    Cost: 11
+}]
 
+describe('grouping the purchases', function() {
     it('group data purchases for week1', function() {
-        var purchases = nelisaPurchases.groupPurchasing(week1Purchases, 'nelisaWeek1',productList);
-        assert.deepEqual(purchases, purchases1);
+        var inputWeek = nelisaPurchases.groupPurchasing(splitInput1);
+        assert.deepEqual(inputWeek, purchases1);
     });
     it('group data purchases for week2', function() {
-        var purchases = nelisaPurchases.groupPurchasing(week2Purchases, 'nelisaWeek2',productList1);
+        var purchases = nelisaPurchases.groupPurchasing(splitInput2);
         assert.deepEqual(purchases, purchases2);
     });
     it('group data purchases for week3', function() {
-        var purchases = nelisaPurchases.groupPurchasing(week3Purchases, 'nelisaWeek3',productList2);
+        var purchases = nelisaPurchases.groupPurchasing(splitInput3);
         assert.deepEqual(purchases, purchases3);
     });
     it('group data purchases for week4', function() {
-        var purchases = nelisaPurchases.groupPurchasing(week4Purchases, 'nelisaWeek4',productList3);
+        var purchases = nelisaPurchases.groupPurchasing(splitInput4);
         assert.deepEqual(purchases, purchases4);
     });
 });
-var purchases1 = { 'Shampoo 1 litre': 120,
-  'Soap Bar': 108,
-  'Bananas - loose': 94,
-  'Apples - loose': 108,
-  'Mixed Sweets 5s': 294,
-  Bread: 900,
-  Imasi: 1230,
-  'Chakalaka Can': 161,
-  'Coke 500ml': 189,
-  'Cream Soda 500ml': 99,
-  'Fanta 500ml': 148.5,
-  'Gold Dish Vegetable Curry Can': 85,
-  'Iwisa Pap 5kg': 340,
-  'Milk 1l': 273,
-  'Top Class Soy Mince': 176
+var purchases1 = {
+    'Shampoo 1 litre': 20,
+    'Soap Bar': 3,
+    'Bananas - loose': 1,
+    'Apples - loose': 1.5,
+    'Mixed Sweets 5s': 3,
+    'Bread': 11,
+    'Imasi': 24,
+    'Chakalaka Can': 7,
+    'Coke 500ml': 3.5,
+    'Cream Soda 500ml': 4.5,
+    'Fanta 500ml': 4.5,
+    'Gold Dish Vegetable Curry Can': 5,
+    'Iwisa Pap 5kg': 20,
+    'Milk 1l': 7,
+    'Top Class Soy Mince': 8
 }
-
-var purchases2 ={ 'Rose (plastic)': 140,
-  'Milk 1l': 924,
-  'Bananas - loose': 56,
-  'Apples - loose': 31.5,
-  'Mixed Sweets 5s': 324,
-  Bread: 504,
-  'Chakalaka Can': 147,
-  'Coke 500ml': 294,
-  'Gold Dish Vegetable Curry Can': 594,
-  'Heart Chocolates': 500,
-  Imasi: 1224,
-  'Iwisa Pap 5kg': 200,
-  'Top Class Soy Mince': 336,
-  'Shampoo 1 litre': 360,
-  'Valentine Cards': 28,
-  'Soap Bar': 15,
-  'Fanta 500ml': 103.5
-}
-
-var purchases3 = { 'Chakalaka Can': 263.5,
-  'Cream Soda 500ml': 144,
-  'Fanta 500ml': 154,
-  'Gold Dish Vegetable Curry Can': 108,
-  'Iwisa Pap 5kg': 280,
-  'Milk 1l': 924,
-  'Apples - loose': 75,
-  'Mixed Sweets 5s': 174,
-  Bread: 432,
-  'Coke 500ml': 63,
-  Imasi: 850,
-  'Top Class Soy Mince': 192,
-  'Shampoo 1 litre': 240,
-  'Soap Bar': 48,
-  'Bananas - loose': 17 }
-
-var purchases4 = { 'Chakalaka Can': 1320,
-  'Bananas - loose': 44,
-  'Apples - loose': 96,
-  'Mixed Sweets 5s': 120,
-  Bread: 957,
-  'Coke 500ml': 315,
-  'Cream Soda 500ml': 171,
-  'Fanta 500ml': 372,
-  'Gold Dish Vegetable Curry Can': 1207,
-  Imasi: 1156,
-  'Milk 1l': 602,
-  'Top Class Soy Mince': 1634,
-  'Soap Bar': 375,
-  'Shampoo 1 litre': 1040,
-  'Iwisa Pap 5kg': 800 }
-  //////////////////////////////////////////////////////////////////////////////////////////
-var salesWeek1 = {
-    'Milk 1l': 390,
-    Imasi: 750,
-    Bread: 540,
-    'Chakalaka Can': 230,
-    'Gold Dish Vegetable Curry Can': 153,
-    'Fanta 500ml': 214.5,
-    'Coke 500ml': 351,
-    'Cream Soda 500ml': 165,
-    'Iwisa Pap 5kg': 510,
-    'Top Class Soy Mince': 264,
-    'Shampoo 1 litre': 90,
-    'Soap Bar': 72,
-    'Bananas - loose': 94,
-    'Apples - loose': 72,
-    'Mixed Sweets 5s': 120
-}
-var salesWeek2 = {
-    Imasi: 900,
-    Bread: 336,
-    'Chakalaka Can': 210,
-    'Gold Dish Vegetable Curry Can': 243,
-    'Fanta 500ml': 149.5,
-    'Coke 500ml': 273,
-    'Cream Soda 500ml': 165,
-    'Iwisa Pap 5kg': 300,
-    'Top Class Soy Mince': 252,
-    'Shampoo 1 litre': 180,
-    'Soap Bar': 30,
-    'Bananas - loose': 56,
-    'Apples - loose': 42,
-    'Mixed Sweets 5s': 147,
-    'Milk 1l': 280,
-    'Heart Chocolates': 700,
-    'Rose (plastic)': 210,
-    'Valentine Cards': 56
-}
-var salesWeek3 = {
-    Imasi: 625,
-    Bread: 288,
-    'Chakalaka Can': 170,
-    'Gold Dish Vegetable Curry Can': 72,
-    'Fanta 500ml': 91,
-    'Coke 500ml': 117,
-    'Cream Soda 500ml': 90,
-    'Iwisa Pap 5kg': 120,
-    'Top Class Soy Mince': 144,
-    'Shampoo 1 litre': 120,
-    'Soap Bar': 48,
-    'Bananas - loose': 34,
-    'Apples - loose': 50,
-    'Mixed Sweets 5s': 80,
-    'Milk 1l': 280
-}
-var salesWeek4 = {
-    Imasi: 850,
-    Bread: 396,
-    'Chakalaka Can': 330,
-    'Gold Dish Vegetable Curry Can': 306,
-    'Fanta 500ml': 156,
-    'Coke 500ml': 292.5,
-    'Cream Soda 500ml': 142.5,
-    'Iwisa Pap 5kg': 480,
-    'Top Class Soy Mince': 516,
-    'Shampoo 1 litre': 390,
-    'Soap Bar': 150,
-    'Bananas - loose': 44,
-    'Apples - loose': 64,
-    'Mixed Sweets 5s': 108,
-    'Milk 1l': 430
-};
-// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-var salesPurchases1 = { 'Milk 1l': 117,
-  Imasi: -480,
-  Bread: -360,
-  'Chakalaka Can': 69,
-  'Gold Dish Vegetable Curry Can': 68,
-  'Fanta 500ml': 66,
-  'Coke 500ml': 162,
-  'Cream Soda 500ml': 66,
-  'Iwisa Pap 5kg': 170,
-  'Top Class Soy Mince': 88,
-  'Shampoo 1 litre': -30,
-  'Soap Bar': -36,
-  'Bananas - loose': 0,
-  'Apples - loose': -36,
-  'Mixed Sweets 5s': -174
-}
-var salesPurchases2 = {
-    Imasi: 560,
-    Bread: 291,
-    'Chakalaka Can': 105,
-    'Gold Dish Vegetable Curry Can': 226,
-    'Fanta 500ml': 95.5,
-    'Coke 500ml': 231,
-    'Cream Soda 500ml': NaN,
-    'Iwisa Pap 5kg': 200,
-    'Top Class Soy Mince': 212,
-    'Shampoo 1 litre': 160,
-    'Soap Bar': 15,
-    'Bananas - loose': 52,
-    'Apples - loose': 12,
-    'Mixed Sweets 5s': -3,
-    'Milk 1l': 175,
-    'Heart Chocolates': 200,
+var purchases2 = {
     'Rose (plastic)': 10,
-    'Valentine Cards': 16
+    'Milk 1l': 9.5,
+    'Bananas - loose': 1,
+    'Apples - loose': 1.5,
+    'Mixed Sweets 5s': 3,
+    'Bread': 9,
+    'Chakalaka Can': 7,
+    'Coke 500ml': 3.5,
+    'Gold Dish Vegetable Curry Can': 5,
+    'Heart Chocolates': 25,
+    'Imasi': 17,
+    'Iwisa Pap 5kg': 20,
+    'Top Class Soy Mince': 8,
+    'Shampoo 1 litre': 20,
+    'Valentine Cards': 2,
+    'Soap Bar': 3,
+    'Fanta 500ml': 4.5
 }
-// ///////////////////////////groupWeeks.csv///////////////////////////////////////
-describe('group data for week',function(){
-    it('should show the group data of week2', function() {
-        var listProduct = nelisaProducts.linesInFiles('./data/week2.csv')
-        var products = nelisaPurchases.nelisaSold(listProduct);
-        assert.deepEqual(products, salesWeek2);
-    });
-    it('should show the group data of week1', function() {
-        var listProduct = nelisaProducts.linesInFiles('./data/week1.csv');
-        var products = nelisaPurchases.nelisaSold(listProduct);
-        assert.deepEqual(products, salesWeek1);
-    });
-    it('should show the group data of week3', function() {
-        var listProduct = nelisaProducts.linesInFiles('./data/week3.csv');
-        var products = nelisaPurchases.nelisaSold(listProduct);
-        assert.deepEqual(products, salesWeek3);
-    });
-    it('should show the group data of week4', function() {
-        var listProduct = nelisaProducts.linesInFiles('./data/week4.csv');
-        var products = nelisaPurchases.nelisaSold(listProduct);
-        assert.deepEqual(products, salesWeek4);
-    });
-});
-// ///////////////////////////////////////////////////////////////////////////
-  describe('find the profit for each week',function(){
-    it('find the profit for week1',function(){
-    var profit = profitable.findingProfit(purchases1,salesWeek1);
-    assert.deepEqual(profit,salesPurchases1);
-  });
-  it('find the profit for week2',function(){
-    var profit = profitable.findingProfit(purchases2,salesWeek2);
-    assert.deepEqual(profit,salesPurchases2);
-  })
-  it('find the profit for week3',function(){
-    var profit = profitable.findingProfit(purchases3,salesWeek3);
-    assert.deepEqual(profit,salesPurchases1);
-  })
-it('find the profit for week4',function(){
-  var profit = profitable.findingProfit(purchases4,salesWeek4);
-  assert.deepEqual(profit,salesPurchases1);
-})
-});
+
+var purchases3 = {
+    'Chakalaka Can': 8.5,
+    'Cream Soda 500ml': 7.5,
+    'Fanta 500ml': 6.5,
+    'Gold Dish Vegetable Curry Can': 8.5,
+    'Iwisa Pap 5kg': 30,
+    'Milk 1l': 9.5,
+    'Apples - loose': 1.5,
+    'Mixed Sweets 5s': 3,
+    'Bread': 9,
+    'Coke 500ml': 3.5,
+    'Imasi': 17,
+    'Top Class Soy Mince': 8,
+    'Shampoo 1 litre': 20,
+    'Soap Bar': 3,
+    'Bananas - loose': 1
+}
+var purchases4 = {
+    'Chakalaka Can': 9,
+    'Bananas - loose': 1,
+    'Apples - loose': 1.5,
+    'Mixed Sweets 5s': 3,
+    'Bread': 9,
+    'Coke 500ml': 3.5,
+    'Cream Soda 500ml': 4.5,
+    'Fanta 500ml': 4.5,
+    'Gold Dish Vegetable Curry Can': 5,
+    'Imasi': 17,
+    'Milk 1l': 7,
+    'Top Class Soy Mince': 8,
+    'Soap Bar': 3,
+    'Shampoo 1 litre': 20,
+    'Iwisa Pap 5kg': 30
+}

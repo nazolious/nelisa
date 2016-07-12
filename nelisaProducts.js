@@ -1,5 +1,4 @@
 var fs = require('fs');
-
 exports.linesInFiles = function(filePath) {
     var filesInFolder = fs.readFileSync(filePath, 'utf-8');
     var lines = filesInFolder
@@ -95,13 +94,12 @@ exports.category = function(productTotal) {
     for (var stock in myCategories) {
         var food = myCategories[stock];
         var quantity = productTotal[stock];
-        // console.log(productTotal[stock]);
         if (!productCategory.hasOwnProperty(food)) {
             productCategory[food] = 0;
         }
         productCategory[food] += quantity;
     }
-    // console.log(productCategory);
+    console.log(productCategory);
 
     var max = 0;
     var mostCategory = {};

@@ -1,5 +1,4 @@
 var fs = require('fs');
-
 exports.sales = function(filePath) {
     var filesInFolder = fs.readFileSync(filePath, 'utf-8');
     var lines = filesInFolder
@@ -22,69 +21,51 @@ exports.sales = function(filePath) {
     // console.log(newPurchase);
     return newPurchase;
 };
-//
-exports.purchasesWeeks = function(newPurchase, weekly1, weekly0) {
+exports.splittingPurchases = function(newPurchase, weekly1, weekly0) {
     var array1 = [];
-    var array2 = [];
-    var array3 = [];
-    var array4 = [];
     newPurchase.forEach(function(bought) {
         if (new Date(bought.dates) <= weekly1 && new Date(bought.dates) > weekly0) {
             array1.push(bought);
         }
-        if (new Date(bought.dates) <= weekly1 && new Date(bought.dates) > weekly0) {
-            array2.push(bought);
-        }
-        if (new Date(bought.dates) <= weekly1 && new Date(bought.dates) > weekly0) {
-            array3.push(bought);
-        }
-        if (new Date(bought.dates) <= weekly1 && new Date(bought.dates) > weekly0) {
-            array4.push(bought);
-        }
-    })
-    var purchasesMap = {
-            'nelisaWeek1': array1,
-            'nelisaWeek2': array3,
-            'nelisaWeek3': array2,
-            'nelisaWeek4': array4
-        }
-        // console.log(purchasesMap);
-    return purchasesMap;
+    });
+    // console.log(array1);
+    return array1;
 };
-
-exports.groupPurchasing = function(purchasesMap, week, productTotal) {
-    var profit = {};
-    purchasesMap[week].forEach(function(gain) {
+exports.groupPurchasing = function(array1) {
+    var weekPurchases = {};
+    array1.forEach(function(gain) {
             var Items = gain.Items;
             var Cost = gain.Cost;
-            if (!profit.hasOwnProperty(Items)) {
-                profit[Items] = 0;
+            if (!weekPurchases.hasOwnProperty(Items)) {
+                weekPurchases[Items] = Cost;
             }
-            profit[Items] += Number(Cost);
         })
-        // console.log(profit);
+        // console.log(weekPurchases);
+    return weekPurchases;
+}
+exports.qtySoldCost = function(weekPurchases, productTotal) {
+    // group data for week//
     var quantitySold = {};
     productTotal.forEach(function(fruittee) {
             var Items = fruittee.item;
-            // console.log(fruittee.quantity);
             var quantity = fruittee.quantity;
             if (!quantitySold.hasOwnProperty(Items)) {
                 quantitySold[Items] = 0;
             }
             quantitySold[Items] += Number(quantity);
         })
-        // console.log(quantitySold);
+        //         //  take my purchases[profit]* sales[quantitySold]
     var costQuantity = {};
-    for (var Cost in profit) {
+    for (var Cost in weekPurchases) {
         var qty = quantitySold[Cost];
-        var items = profit[Cost]*qty;
+        var items = weekPurchases[Cost] * qty;
         if (!costQuantity.hasOwnProperty(Cost)) {
-         costQuantity[Cost] = 0;
+            costQuantity[Cost] = 0;
         }
         costQuantity[Cost] = Number(items);
-      }
-// console.log(costQuantity);
-return costQuantity;
+    }
+    // console.log(costQuantity);
+    return costQuantity;
 };
 exports.nelisaSold = function(productList) {
     var totalWeekly = {};
@@ -92,7 +73,6 @@ exports.nelisaSold = function(productList) {
         var item = solid.item;
         var quantity = solid.quantity;
         var salesPrice = solid.salesPrice * solid.quantity;
-        //  console.log(salesPrice);
         if (totalWeekly[item] === undefined) {
             totalWeekly[item] = 0;
         }

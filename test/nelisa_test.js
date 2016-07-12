@@ -42,10 +42,9 @@ var product1 = {
     'Apples - loose': 36,
     'Mixed Sweets 5s': 49
 };
-
 var product2 = {
-    Imasi: 36,
-    Bread: 28,
+    'Imasi': 36,
+    'Bread': 28,
     'Chakalaka Can': 21,
     'Gold Dish Vegetable Curry Can': 27,
     'Fanta 500ml': 23,
@@ -63,10 +62,9 @@ var product2 = {
     'Rose (plastic)': 14,
     'Valentine Cards': 14
 };
-
 var product3 = {
-    Imasi: 25,
-    Bread: 24,
+    'Imasi': 25,
+    'Bread': 24,
     'Chakalaka Can': 17,
     'Gold Dish Vegetable Curry Can': 8,
     'Fanta 500ml': 14,
@@ -81,10 +79,9 @@ var product3 = {
     'Mixed Sweets 5s': 29,
     'Milk 1l': 28
 };
-
 var product4 = {
-    Imasi: 34,
-    Bread: 33,
+    'Imasi': 34,
+    'Bread': 33,
     'Chakalaka Can': 33,
     'Gold Dish Vegetable Curry Can': 34,
     'Fanta 500ml': 24,
@@ -106,19 +103,16 @@ describe('group data the product list', function() {
         var products = nelisaProducts.groupingData(productList);
         assert.deepEqual(products, product1);
     });
-
     it('group data for week2', function() {
         var productList = nelisaProducts.linesInFiles('./data/week2.csv');
         var products = nelisaProducts.groupingData(productList);
         assert.deepEqual(products, product2);
     });
-    //
     it('group data for week3', function() {
         var productList = nelisaProducts.linesInFiles('./data/week3.csv');
         var products = nelisaProducts.groupingData(productList);
         assert.deepEqual(products, product3);
     });
-
     it('group data for week4', function() {
         var productList = nelisaProducts.linesInFiles('./data/week4.csv');
         var products = nelisaProducts.groupingData(productList);
@@ -195,43 +189,42 @@ describe('find the least popular products sold each week', function() {
 });
 ///////////////////////categoryData//////////////////////////////////////////////////
 var one = {
-    Dairy: 69,
-    Grains: 84,
-    Canned: 23,
-    canned: 17,
-    Drinks: 109,
+    'Dairy': 69,
+    'Grains': 84,
+    'Canned': 23,
+    'canned': 17,
+    'Drinks': 109,
     'Personal Care': 15,
-    Fruit: 83
+    'Fruit': 83
 };
 var two = {
-    Dairy: 64,
-    Grains: 59,
-    Canned: 21,
-    canned: 27,
-    Drinks: 87,
+    'Dairy': 64,
+    'Grains': 59,
+    'Canned': 21,
+    'canned': 27,
+    'Drinks': 87,
     'Personal Care': 11,
-    Fruit: 49,
+    'Fruit': 49,
     'Sugar-Candy': 74,
     'Gifts and Cards': 28
 };
 var three = {
-    Dairy: 53,
-    Grains: 40,
-    Canned: 17,
-    canned: 8,
-    Drinks: 44,
+    'Dairy': 53,
+    'Grains': 40,
+    'Canned': 17,
+    'canned': 8,
+    'Drinks': 44,
     'Personal Care': 12,
-    Fruit: 42
+    'Fruit': 42
 };
 var four = {
-    Dairy: 77,
-    Grains: 92,
-    Canned: 33,
-    canned: 34,
-    Drinks: 88,
+    'Dairy': 77,
+    'Grains': 92,
+    'Canned': 33,
+    'canned': 34,
+    'Drinks': 88,
     'Personal Care': 38,
-    Fruit: 54
-
+    'Fruit': 54
 };
 /////////////////////////////most category///////////////////////////////////
 describe('find the most popular category sold each week', function() {
