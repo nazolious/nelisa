@@ -285,7 +285,7 @@ var salesPurchases2 = {
     'Gold Dish Vegetable Curry Can': 108,
     'Fanta 500ml': 46,
     'Coke 500ml': 126,
-    'Cream Soda 500ml': NaN,
+    // 'Cream Soda 500ml': NaN,
     'Iwisa Pap 5kg': 100,
     'Top Class Soy Mince': 84,
     'Shampoo 1 litre': 60,

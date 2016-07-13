@@ -13,7 +13,7 @@ exports.sales = function(filePath) {
         var result = {
             Shop: shops,
             dates: dates,
-            Items: items,
+            items: items,
             Cost: Cost
         };
         newPurchase.push(result);
@@ -34,25 +34,25 @@ exports.splittingPurchases = function(newPurchase, weekly1, weekly0) {
 exports.groupPurchasing = function(array1) {
     var weekPurchases = {};
     array1.forEach(function(gain) {
-            var Items = gain.Items;
+            var items = gain.items;
             var Cost = gain.Cost;
-            if (!weekPurchases.hasOwnProperty(Items)) {
-                weekPurchases[Items] = Cost;
+            if (!weekPurchases.hasOwnProperty(items)) {
+                weekPurchases[items] = Cost;
             }
         })
-        // console.log(weekPurchases);
+        console.log(weekPurchases);
     return weekPurchases;
 }
 exports.qtySoldCost = function(weekPurchases, productTotal) {
     // group data for week//
     var quantitySold = {};
     productTotal.forEach(function(fruittee) {
-            var Items = fruittee.item;
+            var items = fruittee.item;
             var quantity = fruittee.quantity;
-            if (!quantitySold.hasOwnProperty(Items)) {
-                quantitySold[Items] = 0;
+            if (!quantitySold.hasOwnProperty(items)) {
+                quantitySold[items] = 0;
             }
-            quantitySold[Items] += Number(quantity);
+            quantitySold[items] += Number(quantity);
         })
         //         //  take my purchases[profit]* sales[quantitySold]
     var costQuantity = {};
