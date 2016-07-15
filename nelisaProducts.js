@@ -99,7 +99,7 @@ exports.category = function(productTotal) {
         }
         productCategory[food] += quantity;
     }
-    console.log(productCategory);
+    // console.log(productCategory);
 
     var max = 0;
     var mostCategory = {};
