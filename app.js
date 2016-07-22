@@ -1,6 +1,9 @@
 var fs = require('fs');
 var handlebars = require('handlebars');
 var nelisaProducts = require('./nelisaProducts');
+var nelisaPurchases = require('./nelisaPurchases');
+var mostCat = require('./mostCat');
+var profitable = require('./profitable');
 
 var week = process.argv[2]
 var filePath = './data/' + week + '.csv'
@@ -13,25 +16,20 @@ var productCategory = nelisaProducts.groupingData(productList);
 var leastCategory = nelisaProducts.least(productCategory);
 
 var newPurchase = nelisaPurchases.sales('./data/purchases.csv');
-// / var array1 = nelisaPurchases.splittingPurchases(newPurchase);
-var weekly1 = new Date('7-Feb');
-var weekly2 = new Date('14-Feb');
-var weekly3 = new Date('21-Feb');
-var weekly4 = new Date('1-Mar');
-var weekly0 = new Date('28-Jan');
-
-var purchases = nelisaPurchases.splittingPurchases(newPurchase, weekly4, weekly3);
+var purchasesMap = nelisaPurchases.splittingPurchases(newPurchase);
+var weekPurchases = nelisaPurchases.groupPurchasing(purchasesMap,week);
+var purchases = nelisaPurchases.qtySoldCost(weekPurchases,productTotal);
 var salesWeek = nelisaPurchases.nelisaSold(productList);
 var profitability = profitable.findingProfit(salesWeek,purchases);
 var getProfit = profitable.mostProfit(profitability);
+var getCat = mostCat.findingCategories(weekPurchases);
 
 var data = {
-  stats:[getData,leastData,mostCategory,leastCategory]
+  stats:[getData,leastData,mostCategory,leastCategory,getProfit,getCat]
 }
 var source = fs.readFileSync('./nelisa.handlebars','utf-8');
 //create template
 var template = handlebars.compile(source);
 //combine the template + data
 var result = template(data);
-
 fs.writeFileSync(week +'_weekSales.html',result)

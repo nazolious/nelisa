@@ -29,18 +29,19 @@ exports.findingCategories = function(weekPurchases){
       }
       purchasesCategory[stock] += quantity;
   }
-  console.log(purchasesCategory);
+  // console.log(purchasesCategory);
   var max = 0;
   var mostProfitCategory = {};
   for (var key in purchasesCategory) {
       if (purchasesCategory[key] > max) {
           max = purchasesCategory[key];
           mostProfitCategory = {
+            description: 'Most Profit Category',
               category: key,
               profit: max
           }
         }
       }
-  console.log(mostProfitCategory);
+  // console.log(mostProfitCategory);
     return mostProfitCategory;
   }

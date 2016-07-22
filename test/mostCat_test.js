@@ -5,19 +5,31 @@ var mostCat = require('../mostCat');
 describe('the most profitable category for each week',function(){
   it('the most profitable category for week1',function(){
     var cat = mostCat.findingCategories(purchases1);
-    assert.deepEqual(cat,{ category: 'Grains', profit: 39 })
+    assert.deepEqual(cat, {
+      description: 'Most Profit Category',
+        category: 'Grains',
+        profit: 39 })
   })
   it('the most profitable category for week2',function(){
     var cat = mostCat.findingCategories(purchases2);
-    assert.deepEqual(cat,{ category: 'Grains', profit: 37 })
+    assert.deepEqual(cat,{
+        description: 'Most Profit Category',
+      category: 'Grains',
+       profit: 37 })
   })
   it('the most profitable category for week3',function(){
     var cat = mostCat.findingCategories(purchases3);
-    assert.deepEqual(cat,{ category: 'Grains', profit: 47 })
+    assert.deepEqual(cat,{
+      description: 'Most Profit Category',
+      category: 'Grains',
+       profit: 47 })
   })
   it('the most profitable category for week4',function(){
     var cat = mostCat.findingCategories(purchases4);
-    assert.deepEqual(cat,{ category: 'Grains', profit: 47 })
+    assert.deepEqual(cat,{
+        description: 'Most Profit Category,'
+      category: 'Grains',
+      profit: 47 })
   })
 })
 var purchases1 =  { 'Shampoo 1 litre': 20,

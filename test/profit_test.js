@@ -285,7 +285,7 @@ var salesPurchases2 = {
     'Gold Dish Vegetable Curry Can': 108,
     'Fanta 500ml': 46,
     'Coke 500ml': 126,
-    // 'Cream Soda 500ml': NaN,
+    'Cream Soda 500ml': 165,
     'Iwisa Pap 5kg': 100,
     'Top Class Soy Mince': 84,
     'Shampoo 1 litre': 60,
@@ -332,14 +332,18 @@ var salesPurchases4 = {
     'Mixed Sweets 5s': -12,
     'Milk 1l': 129
 }
-
 describe('find the profit for each week', function() {
     it('find the profit for week1', function() {
         var profit = profitable.findingProfit(salesWeek1, boughtforWeek1);;
         assert.deepEqual(profit, salesPurchases1);
     });
     it('find the profit for week2', function() {
+
         var profit = profitable.findingProfit(salesWeek2, boughtforWeek2);
+
+        console.log(profit);
+        console.log(salesPurchases2);
+
         assert.deepEqual(profit, salesPurchases2);
     });
     it('find the profit for week3', function() {
@@ -355,6 +359,7 @@ describe('the most profitable product for each week', function() {
     it('the most profitable product for week1', function() {
         var profit = profitable.mostProfit(salesPurchases1);
         assert.deepEqual(profit, {
+          description: 'Most Profit Product',
             Item: 'Iwisa Pap 5kg',
             profit: 170
         });
@@ -362,6 +367,7 @@ describe('the most profitable product for each week', function() {
     it('the most profitable product for week2', function() {
         var profit = profitable.mostProfit(salesPurchases2);
         assert.deepEqual(profit, {
+          description: 'Most Profit Product',
             Item: 'Imasi',
             profit: 288
         });
@@ -369,6 +375,7 @@ describe('the most profitable product for each week', function() {
     it('the most profitable product for week3', function() {
         var profit = profitable.mostProfit(salesPurchases3);
         assert.deepEqual(profit, {
+          description: 'Most Profit Product',
             Item: 'Imasi',
             profit: 200
         });
@@ -376,6 +383,7 @@ describe('the most profitable product for each week', function() {
     it('the most profitable product for week4', function() {
         var profit = profitable.mostProfit(salesPurchases4);
         assert.deepEqual(profit, {
+          description: 'Most Profit Product',
             Item: 'Imasi',
             profit: 272
         });
