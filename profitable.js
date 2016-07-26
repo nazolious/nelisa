@@ -15,7 +15,7 @@ exports.findingProfit = function(salesWeek,purchases) {
     if(!salesAmount){
       salesAmount = 0;
     }
-    profitability[key] = (salesAmount - purchaseAmount );
+    profitability[key] = (salesAmount - purchaseAmount);
 
   }
   }

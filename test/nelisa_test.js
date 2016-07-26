@@ -1,4 +1,4 @@
-var assert = require('assert');
+jecvar assert = require('assert');
 var nelisaProducts = require('../nelisaProducts');
 var nelisaPurchases = require('../nelisaPurchases');
 

@@ -74,21 +74,20 @@ exports.qtySoldCost = function(weekPurchases, productTotal) {
     // group data for week//
     var quantitySold = {};
     for (var key in productTotal) {
-      var Items = productTotal[key];
-      console.log(Items);
-      var quantity = productTotal[key];
+      var Items = productTotal[key].item;
+      var quantity = productTotal[key].quantity;
+      // console.log(quantity);
       // console.log(Items);
-      if (!quantitySold.hasOwnProperty(key)) {
-        quantitySold[key] = 0;
+      if (!quantitySold.hasOwnProperty(Items)) {
+        quantitySold[Items] = 0;
       }
-      quantitySold[key] += Number(quantity);
+      quantitySold[Items] += Number(quantity);
         }
 // console.log(quantitySold);
              //  take my purchases[profit]* [quantitySold]
     var costQuantity = {};
     for (var Cost in weekPurchases) {
         var qty = quantitySold[Cost];
-
         var items = weekPurchases[Cost] * qty;
         if (!costQuantity.hasOwnProperty(Cost)) {
             costQuantity[Cost] = 0;

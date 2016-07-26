@@ -338,12 +338,7 @@ describe('find the profit for each week', function() {
         assert.deepEqual(profit, salesPurchases1);
     });
     it('find the profit for week2', function() {
-
         var profit = profitable.findingProfit(salesWeek2, boughtforWeek2);
-
-        console.log(profit);
-        console.log(salesPurchases2);
-
         assert.deepEqual(profit, salesPurchases2);
     });
     it('find the profit for week3', function() {
