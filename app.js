@@ -30,40 +30,38 @@ var getWeeklySales = function(week){
   var dataWeek = {
     stats:[getData,leastData,mostCategory,leastCategory,getProfit,getCat]
   }
-  return dataWeek;
-};
-//
-var createWeeklyData = function(weeklyData){
   var source = fs.readFileSync('./nelisa.handlebars','utf-8');
   //create template
   var template = handlebars.compile(source);
   //combine the template + data
-  var result = template(weeklyData);
+  var result = template(dataWeek);
   return result
   //fs.writeFileSync(week +'_weekSales.html',result)
 };
 
 // create a route
-app.get('/sales/week1', function (req, res) {
-  var sales = getWeeklySales('week1');
-  res.send(createWeeklyData(sales));
-});
-app.get('/sales/week2',function (req, res) {
-  var sales = getWeeklySales('week2');
-  res.send(createWeeklyData(sales));
-});
-app.get('/sales/week3', function (req, res) {
-  var sales = getWeeklySales('week3');
-  res.send(createWeeklyData(sales));
-});
-app.get('/sales/week4', function(req, res) {
-  var sales = getWeeklySales('week4');
-  res.send(createWeeklyData(sales))
-})
-// app.get('/sales/:week_name', function(req, res){
-//   if (req.params.week_name === "week1")
-//         res.send(createWeeklyData('week1'))
+// app.get('/sales/week1', function (req, res) {
+//   var sales = getWeeklySales('week1');
+//   res.send(createWeeklyData(sales));
 // });
+// app.get('/sales/week2',function (req, res) {
+//   var sales = getWeeklySales('week2');
+//   res.send(createWeeklyData(sales));
+// });
+// app.get('/sales/week3', function (req, res) {
+//   var sales = getWeeklySales('week3');
+//   res.send(createWeeklyData(sales));
+// });
+// app.get('/sales/week4', function(req, res) {
+//   var sales = getWeeklySales('week4');
+//   res.send(createWeeklyData(sales))
+// })
+app.get('/sales/:week_name', function(req, res){
+  // if (req.params.week_name === "week1")
+  var week = req.params.week_name;
+  var sales = getWeeklySales(week);
+        res.send(sales);
+});
 //start the server
 var server = app.listen(3005, function () {
 
