@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+    body {
+        background-color: lightblue;
+    }
+    a {
+      color: black;
+    }
+</style>
+
+<body>
+
+    {{#stats}}
+        <ul>
+            The {{description}} is <strong>{{item}} {{category}}{{Item}}: {{qty}} {{quantity}}{{profit}}</strong>
+        </ul>
+    {{/stats}}
+      
+        <a class="btn btn-default" href="/sales/week1" role="button">week1</a>
+        <a class="btn btn-default" href="/sales/week2" role="button">week2</a>
+        <a class="btn btn-default" href="/sales/week3" role="button">week3</a>
+        <a class="btn btn-default" href="/sales/week4" role="button">week4</a>
+</body>
+
+</html>
