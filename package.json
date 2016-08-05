@@ -1,7 +1,7 @@
 {
   "name": "nelisa",
   "version": "0.0.0",
-  "description": "",
+  "description": "nelisa's spaza shop website",
   "main": "app.js",
   "directories": {
     "test": "test"
@@ -13,9 +13,16 @@
     "type": "git",
     "url": "https://github.com/nazolious/nelisa.git"
   },
-  "author": "",
+  "author": "sinazo bangani",
   "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/nazolious/nelisa/issues"
-  }
+  },
+  "dependencies": {
+    "express": "~4.14.0",
+    "express-handlebars": "~3.0.0"
+  },
+    "engines": {
+    "node": "4.1.1"
+  },
 }
