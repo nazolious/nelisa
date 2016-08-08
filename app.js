@@ -6,7 +6,7 @@ var mostCat = require('./mostCat');
 var profitable = require('./profitable');
 var express = require('express');
 var app = express();
-var exphbs  = require('express-handlebars');
+// var exphbs  = require('express-handlebars');
 
 var getWeeklySales = function(week) {
     //var week = process.argv[2]
@@ -64,12 +64,12 @@ app.get('/sales/:week_name', function(req, res) {
     res.send(sales);
 });
 //start the server
-var server = app.listen(3005, function() {
+var server = app.listen(5000, function() {
     var host = server.address().address;
     var port = server.address().port;
 });
-app.set('port', (process.env.PORT || 5000));
-//start the app like this:
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-});
+// app.set('port', (process.env.PORT || 5000));
+// //start the app like this:
+// app.listen(app.get('port'), function() {
+//   console.log('Node app is running on port', app.get('port'));
+// });
