@@ -6,7 +6,8 @@ var mostCat = require('./mostCat');
 var profitable = require('./profitable');
 var express = require('express');
 var app = express();
-// var exphbs  = require('express-handlebars');
+var exphbs  = require('express-handlebars');
+
 
 var getWeeklySales = function(week) {
     //var week = process.argv[2]
@@ -31,43 +32,34 @@ var getWeeklySales = function(week) {
     var dataWeek = {
         stats: [getData, leastData, mostCategory, leastCategory, getProfit, getCat]
     }
-    var source = fs.readFileSync('./views/layouts/main.handlebars', 'utf-8');
+    // var source = fs.readFileSync('./views/layouts/main.handlebars', 'utf-8');
     //create template
-    var template = handlebars.compile(source);
+    // var template = handlebars.compile(source);
     //combine the template + data
-    var result = template(dataWeek);
+    // var result = template(dataWeek);
       // fs.writeFileSync(week +'_weekSales.html',result)
-    return result
+    return dataWeek;
 
 };
 
-// create a route
-// app.get('/sales/week1', function (req, res) {
-//   var sales = getWeeklySales('week1');
-//   res.send(createWeeklyData(sales));
-// });
-// app.get('/sales/week2',function (req, res) {
-//   var sales = getWeeklySales('week2');
-//   res.send(createWeeklyData(sales));
-// });
-// app.get('/sales/week3', function (req, res) {
-//   var sales = getWeeklySales('week3');
-//   res.send(createWeeklyData(sales));
-// });
-// app.get('/sales/week4', function(req, res) {
-//   var sales = getWeeklySales('week4');
-//   res.send(createWeeklyData(sales))
-// })
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+
+app.get('/', function (req, res) {
+    res.render('home');
+  });
+
 app.get('/sales/:week_name', function(req, res) {
     var week = req.params.week_name;
-    var sales = getWeeklySales(week);
-    res.send(sales);
+    // var weekFile = './data/' + week + '.csv';
+    var data = getWeeklySales(week);
+    res.render('weeklyStats',data);
+
+    // var weekFile = "../"getWeeklySales(week);
+    // res.send(weekFile);
 });
-//start the server
-// var server = app.listen(3005, function() {
-    // var host = server.address().address;
-    // var port = server.address().port;
-// });
+
 app.set('port', (process.env.PORT || 5000));
 //start the app like this:
 app.listen(app.get('port'), function() {

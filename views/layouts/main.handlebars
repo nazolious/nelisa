@@ -10,57 +10,29 @@
     body {
         background-color: lightblue;
     }
+
     a {
-      color: black;
+        color: black;
     }
 </style>
 
 <body>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">Nelisa's Spaza</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a class="btn btn-default" href="/sales/week1" role="button">week1</a></li>
-        <li><a class="btn btn-default" href="/sales/week2" role="button">week2</a></li>
-        <li><a class="btn btn-default" href="/sales/week3" role="button">week3</a></li>
-        <li><a class="btn btn-default" href="/sales/week4" role="button">week4</a></li>
-      </ul>
-    </div>
-  </nav>
-    <div class="container">
-        <!-- <ul>
-            The {{description}} is <strong>{{item}} {{category}}{{Item}}: {{qty}} {{quantity}}{{profit}}</strong>
-        </ul> -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Nelisa's Spaza</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a class="btn btn-default" href="/sales/week1" role="button">week1</a></li>
+                <li><a class="btn btn-default" href="/sales/week2" role="button">week2</a></li>
+                <li><a class="btn btn-default" href="/sales/week3" role="button">week3</a></li>
+                <li><a class="btn btn-default" href="/sales/week4" role="button">week4</a></li>
+            </ul>
+        </div>
+    </nav>
 
-        <table class="table table-condensed">
-   <thead>
-     <tr>
-       <th>Description</th>
-       <th>Product</th>
-       <th>Qty</th>
-     </tr>
-   </thead>
-   <tbody>
-     {{#stats}}
-     <tr>
-       <td>{{description}}</td>
-       <td>{{item}} {{category}}{{Item}}</td>
-       <td>{{qty}} {{quantity}}{{profit}}</td>
-     </tr>
-     {{/stats}}
-   </tbody>
- </table>
-      </div>
-
-    <!-- <div class="container">
-        <a class="btn btn-default" href="/sales/week1" role="button">week1</a>
-        <a class="btn btn-default" href="/sales/week2" role="button">week2</a>
-        <a class="btn btn-default" href="/sales/week3" role="button">week3</a>
-        <a class="btn btn-default" href="/sales/week4" role="button">week4</a>
-      </div> -->
+    {{{body}}}
 </body>
 
 </html>
