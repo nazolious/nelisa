@@ -8,33 +8,33 @@ var conn = mysql.createConnection({
 
 });
 
-
 var categoryIdMap = [];
 
 conn.query('select * from categories', function(err, results) {
 if (err) throw err;
 
-    var myCategories = {
-        'Milk 1l': 'Dairy',
-        'Imasi': 'Dairy',
-        'Bread': 'Grains',
-        'Chakalaka Can': 'Canned',
-        'Gold Dish Vegetable Curry Can': 'canned',
-        'Fanta 500ml': 'Drinks',
-        'Coke 500ml': 'Drinks',
-        'Cream Soda 500ml': 'Drinks',
-        'Iwisa Pap 5kg': 'Grains',
-        'Top Class Soy Mince': 'Grains',
-        'Shampoo 1 litre': 'Personal Care',
-        'Soap Bar': 'Personal Care',
-        'Bananas - loose': 'Fruit',
-        'Apples - loose': 'Fruit',
-        'Mixed Sweets 5s': 'Sugar-Candy',
-        'Heart Chocolates': 'Sugar-Candy',
-        'Rose (plastic)': 'Gifts and Cards',
-        'Valentine Cards': 'Gifts and Cards'
-    };
+    var myCategories = [
+        {product : 'Milk 1l', category : 'Dairy'},
+        {product : 'Imasi', category :'Dairy'},
+        {product : 'Bread', category :'Grains'},
+        {product : 'Chakalaka Can', category :'Canned'},
+        {product : 'Gold Dish Vegetable Curry Can', category : 'canned'},
+        {product : 'Fanta 500ml', category : 'Drinks'},
+        {product : 'Coke 500ml', category : 'Drinks'},
+        {product : 'Cream Soda 500ml', category : 'Drinks'},
+        {product : 'Iwisa Pap 5kg', category : 'Grains'},
+        {product : 'Top Class Soy Mince', category : 'Grains'},
+        {product : 'Shampoo 1 litre', category : 'Personal Care'},
+        {product : 'Soap Bar', category : 'Personal Care'},
+        {product : 'Bananas - loose', category : 'Fruit'},
+        {product : 'Apples - loose', category : 'Fruit'},
+        {product : 'Mixed Sweets 5s', category : 'Sugar-Candy'},
+        {product : 'Heart Chocolates', category : 'Sugar-Candy'},
+        {product : 'Rose (plastic)', category : 'Gifts and Cards'},
+        {product : 'Valentine Cards', category : 'Gifts and Cards'}
+    ];
     // build categoryIdMap
+
     results.forEach(function(item){
       var result = {
         category: item.category,
@@ -43,46 +43,37 @@ if (err) throw err;
       categoryIdMap.push(result);
     })
 
-      // console.log(categoryIdMap);
+    // console.log(" From DTBS -------");
+    // console.log(categoryIdMap);
+    //
+    // console.log(" From FILES -------");
+    // console.log(myCategories);
 
-    // create a new 'list for products' to insert into the database;
+    var myValues = [];
+    categoryIdMap.forEach(function(item1){
+      myCategories.forEach(function(item2){
+        if (item1.category === item2.category) {
+          // console.log(item2.product);
+          var result = {
+            product: item2.product,
+            category_id: item1.category_id
+          }
+          myValues.push(result);
+        }
+      })
+    })
+console.log(myValues);
 
-    //loop through all the products read from CSV file
-  var readingFiles = fs.readFileSync('./data/week2.csv', 'utf-8').split('\n');
-  var input = [];
-  for (var i = 0; i < readingFiles.length -1; i++) {
-    var data = readingFiles[i].split(',');
-  //  name = data[2];
-    // console.log(readingFiles[i]);
-
-    if(input.indexof(data[2]) === -1){
-      input.push(data[2]);
-    }
-
-  }
-var myValues = [];
-  for (var i = 0; i < input.length; i++) {
-    for (var category in categoryIdMap) {
-    var productName = input[i];
-    var categoryName = myCategories[productName];
-    var category_id = categoryIdMap[categoryName];
-      }
-    }
-  myValues.push([
-    productName,
-    category_id
-  ])
-  console.log(myValues);
-  }
-
-      // what is my productName
-
-      // get the category name for my productName
-
-      // get the database category id from the categoryIdMap
-
-      // insert product name and category_id in 'list for products'
-
-    // now bulk insert 'list for products' into the database
-  conn.end();
+var values = [];
+myValues.forEach(function(item){
+  var result = [
+    item.product,
+    item.category_id
+  ]
+  values.push(result);
+})
+conn.query( "INSERT INTO products (product, category_id) VALUES ?", [values], function(err) {
+    if (err) throw err;
+});
+conn.end();
 });
