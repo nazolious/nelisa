@@ -14,8 +14,8 @@ if (err) throw err;
   // console.log(results);
 results.forEach(function(item){
   var result = {
-    productName: item.product,
-    productName_id: item.id
+    product: item.product,
+    product_id: item.id
   }
   productIdMap.push(result);
 
@@ -29,10 +29,12 @@ var input = [];
 var product = readingFiles.forEach(function(item) {
     var salesData = item.split(',');
     var dates = salesData[1];
+    var product = salesData[2];
     var quantity = salesData[3];
     var salesPrice = salesData[4];
     var result = {
         date: dates,
+        product: product,
         QTY: quantity,
         salesPrice: salesPrice
     };
@@ -43,14 +45,16 @@ var product = readingFiles.forEach(function(item) {
 var productValues = [];
 productIdMap.forEach(function(bulk1){
   input.forEach(function(bulk2){
-      // console.log(item2.product);
+    if (bulk1.product === bulk2.product) {
       var result = {
         date: bulk2.date,
         QTY: bulk2.QTY,
         salesPrice: bulk2.salesPrice,
-        productName_id: bulk1.productName_id
+        product_id: bulk1.product_id
       }
-      productValues.push(result);
+        productValues.push(result);
+    }
+      // console.log(item2.product);
   })
 })
 // console.log(productValues);
@@ -67,6 +71,7 @@ productValues.forEach(function(item){
 console.log(values);
 conn.query( "INSERT INTO sales (dates,qty,salesPrice,product_id) VALUES ?", [values], function(err) {
     if (err) throw err;
+
 });
 conn.end();
 

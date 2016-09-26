@@ -21,13 +21,21 @@ create table products (
 
 create table sales (
     id int primary key auto_increment,
-    dates DATE,
+    dates char(100) not null,
     qty int,
-    salesPrice decimal(10,2),
+    salesPrice char(100) not null,
     product_id int,
-    foreign key (product_id) references products(id)
-    -- CONSTRAINT uc_product UNIQUE (product)
+    foreign key (product_id) references products(id),
+    CONSTRAINT uc_id UNIQUE (id)
 );
-
+create table purchases (
+    id int primary key auto_increment,
+    dates char(100) not null,
+    qty int,
+    cost char(100) not null,
+    product_id int,
+    foreign key (product_id) references products(id),
+    CONSTRAINT uc_id UNIQUE (id)
+);
 -- you can write a select query to check for data in a table
 -- select * from products;
