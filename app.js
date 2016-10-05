@@ -13,6 +13,8 @@ var app = express();
 var exphbs  = require('express-handlebars');
 var products = require('./routes/products');
 var categories = require('./routes/categories');
+var purchases = require('./routes/purchases');
+// var sales = require('./routes/sales');
 
 var dbOptions = {
       host: 'localhost',
@@ -67,16 +69,19 @@ function errorHandler(err, req, res, next) {
 //setup the handlers
 
 app.get('/categories', categories.show);
-// app.get('/categories/add', categories.showAdd);
+app.get('/categories/add', categories.showAdd);
 // app.get('/categories/edit/:id', categories.get);
 // app.post('/categories/update/:id', categories.update);
 // app.post('/categories/add', categories.add);
 // //this should be a post but this is only an illustration of CRUD - not on good practices
 // app.get('/categories/delete/:id', categories.delete);
 app.get('/products', products.show);
-// app.get('/', function (req, res) {
-//     res.render('home');
-//   });
+// app.get('/products/add', products.showAdd);
+app.get('/purchases', purchases.show);
+// app.get('/sales', sales.show);
+app.get('/', function (req, res) {
+    res.render('home');
+  });
 //
 // app.get('/sales/:week_name', function(req, res) {
 //     var week = req.params.week_name;

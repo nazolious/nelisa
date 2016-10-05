@@ -1,0 +1,20 @@
+<h1>sales</h1>
+<div class="container">
+
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>product</th>
+                <th>category</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#sales}}
+                <tr>
+                    <td>{{product}}</td>
+                    <td>{{category}}</td>
+                </tr>
+            {{/sales}}
+        </tbody>
+    </table>
+</div>

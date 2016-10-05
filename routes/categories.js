@@ -12,9 +12,9 @@ exports.show = function (req, res, next) {
 	});
 };
 
-// exports.showAdd = function(req, res){
-// 	res.render('add_category');
-// }
+exports.showAdd = function(req, res){
+	res.render('add_category');
+}
 //
 // exports.add = function (req, res, next) {
 // 	req.getConnection(function(err, connection){
