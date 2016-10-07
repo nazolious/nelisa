@@ -14,7 +14,7 @@ var exphbs  = require('express-handlebars');
 var products = require('./routes/products');
 var categories = require('./routes/categories');
 var purchases = require('./routes/purchases');
-// var sales = require('./routes/sales');
+var sales = require('./routes/sales');
 
 var dbOptions = {
       host: 'localhost',
@@ -70,15 +70,27 @@ function errorHandler(err, req, res, next) {
 
 app.get('/categories', categories.show);
 app.get('/categories/add', categories.showAdd);
-// app.get('/categories/edit/:id', categories.get);
-// app.post('/categories/update/:id', categories.update);
-// app.post('/categories/add', categories.add);
+app.post('/categories/add', categories.add);
+app.get('/categories/edit/:id', categories.get);
+app.post('/categories/update/:id', categories.update);
 // //this should be a post but this is only an illustration of CRUD - not on good practices
-// app.get('/categories/delete/:id', categories.delete);
+app.get('/categories/delete/:id', categories.delete);
+
 app.get('/products', products.show);
-// app.get('/products/add', products.showAdd);
+app.get('/products/add', products.showAdd);
+app.post('/products/add', products.add);
+app.get('/products/edit/:id', products.get);
+app.post('/products/update/:id', products.update);
+//this should be a post but this is only an illustration of CRUD - not on good practices
+app.get('/products/delete/:id', products.delete);
+
 app.get('/purchases', purchases.show);
-// app.get('/sales', sales.show);
+// app.get('/purchases/add', purchases.showAdd);
+// app.post('/purchases/add', purchases.add);
+
+app.get('/sales', sales.show);
+// app.get('/sales/add', sales.showAdd);
+
 app.get('/', function (req, res) {
     res.render('home');
   });

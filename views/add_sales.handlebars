@@ -1,0 +1,16 @@
+<h1>Add sales</h1>
+
+<form action="/sales/add" method="POST">
+
+	<div>
+		<label for="">product</label>
+		<input type="text" name="product" value="{{products}}">
+	</div>
+
+	<div>
+		<label for="">salesPrice</label>
+		<input type="number" step="any" name="price" value="{{salesPrice}}">
+	</div>
+
+	<input type="submit">
+</form>
