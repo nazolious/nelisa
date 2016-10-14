@@ -1,24 +1,28 @@
 <h1>sales</h1>
+<a href="/sales/add">Add</a>
 <div class="container">
 
     <table class="table table-condensed">
         <thead>
             <tr>
-              <th>dates</th>
+              <th>date</th>
               <th>product</th>
               <th>qty</th>
               <th>salesPrice</th>
+              <th>Edit</th>
+              <th>DELETE</th>
 
             </tr>
         </thead>
         <tbody>
             {{#sales}}
                 <tr>
-                    <td>{{dates}}</td>
+                    <td>{{date}}</td>
                     <td>{{product}}</td>
                       <td>{{qty}}</td>
                     <td>{{salesPrice}}</td>
-
+                    <td><a href="/sales/edit/{{sales_id}}">Edit</a></td>
+                  <td><a href="/sales/delete/{{sales_id}}">Delete</a></td>
                 </tr>
             {{/sales}}
         </tbody>

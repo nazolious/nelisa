@@ -28,12 +28,12 @@ var input = [];
 // console.log(readingFiles);
 var product = readingFiles.forEach(function(item) {
     var salesData = item.split(',');
-    var dates = salesData[1];
+    var date = salesData[1];
     var product = salesData[2];
     var quantity = salesData[3];
     var salesPrice = salesData[4];
     var result = {
-        date: dates,
+        date: date,
         product: product,
         QTY: quantity,
         salesPrice: salesPrice
@@ -69,7 +69,7 @@ productValues.forEach(function(item){
   values.push(result);
 })
 console.log(values);
-conn.query( "INSERT INTO sales (dates,qty,salesPrice,product_id) VALUES ?", [values], function(err) {
+conn.query( "INSERT INTO sales (date,qty,salesPrice,product_id) VALUES ?", [values], function(err) {
     if (err) throw err;
 
 });

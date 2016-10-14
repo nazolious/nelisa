@@ -24,12 +24,12 @@ var inputFromPurchases = [];
 // console.log(readingFiles);
 var product = readingFiles.forEach(function(item) {
     var purchasesData = item.split(';');
-    var dates = purchasesData[1];
+    var date = purchasesData[1];
     var product = purchasesData[2];
     var quantity = purchasesData[3];
     var cost = purchasesData[4];
     var result = {
-        date: dates,
+        date: date,
         product: product,
         QTY: quantity,
         cost: cost
@@ -64,7 +64,7 @@ productIdMap.forEach(function(bulk1){
     values.push(result);
   })
   console.log(values);
-  conn.query( "INSERT INTO purchases (dates,qty,cost,product_id) VALUES ?", [values], function(err) {
+  conn.query( "INSERT INTO purchases (date,qty,cost,product_id) VALUES ?", [values], function(err) {
       if (err) throw err;
 
   });

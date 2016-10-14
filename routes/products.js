@@ -63,7 +63,7 @@ exports.update = function(req, res, next){
 
 	var data = {
 		category_id : Number(req.body.category_id),
-		products : req.body.products,
+		product : req.body.product
 		// price : Number(req.body.price)
 	};
   	var id = req.params.id;
