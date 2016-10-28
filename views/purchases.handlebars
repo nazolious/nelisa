@@ -1,0 +1,30 @@
+<h1>purchases</h1>
+<a href="/purchases/add">Add</a>
+<div class="container">
+
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>date</th>
+                <th>product</th>
+                <th>qty</th>
+                <th>cost</th>
+                <th>Edit</th>
+                <th>DELETE</th>
+            </tr>
+        </thead>
+        <tbody>
+
+{{#purchases}}
+<tr>
+  <td>{{date}}</td>
+    <td>{{product}}</td>
+    <td>{{qty}}</td>
+    <td>{{cost}}</td>
+    <td><a href="/purchases/edit/{{purchases_id}}">Edit</a></td>
+    <td><a href="/purchases/delete/{{id}}">DELETE</a></td>
+</tr>
+{{/purchases}}
+</tbody>
+</table>
+</div>

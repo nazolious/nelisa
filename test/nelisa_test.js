@@ -1,4 +1,4 @@
-var assert = require('assert');
+jecvar assert = require('assert');
 var nelisaProducts = require('../nelisaProducts');
 var nelisaPurchases = require('../nelisaPurchases');
 
@@ -124,6 +124,7 @@ describe('find the most popular products sold each week', function() {
     it('should tell the most popular products for week1', function() {
         var products = nelisaProducts.mostPopular(product1);
         assert.deepEqual(products, {
+            description: 'Most Popular Product',
             item: "Coke 500ml",
             qty: 54
         });
@@ -132,6 +133,7 @@ describe('find the most popular products sold each week', function() {
     it('should tell the most popular products for week2', function() {
         var products = nelisaProducts.mostPopular(product2);
         assert.deepEqual(products, {
+          description: 'Most Popular Product',
             item: 'Mixed Sweets 5s',
             qty: 54
         });
@@ -140,6 +142,7 @@ describe('find the most popular products sold each week', function() {
     it('should tell the most popular products for week3', function() {
         var products = nelisaProducts.mostPopular(product3);
         assert.deepEqual(products, {
+          description: 'Most Popular Product',
             item: 'Mixed Sweets 5s',
             qty: 29
         });
@@ -148,6 +151,7 @@ describe('find the most popular products sold each week', function() {
     it('should tell the most popular products for week4', function() {
         var products = nelisaProducts.mostPopular(product4);
         assert.deepEqual(products, {
+          description: 'Most Popular Product',
             item: "Coke 500ml",
             qty: 45
         });
@@ -158,6 +162,7 @@ describe('find the least popular products sold each week', function() {
     it('should tell the least popular products for week1', function() {
         var products = nelisaProducts.leastPopular(product1);
         assert.deepEqual(products, {
+            description: 'Least Popular Product',
             item: "Shampoo 1 litre",
             qty: 3
         });
@@ -166,6 +171,7 @@ describe('find the least popular products sold each week', function() {
     it('should tell the least popular products for week2', function() {
         var products = nelisaProducts.leastPopular(product2);
         assert.deepEqual(products, {
+            description: 'Least Popular Product',
             item: "Soap Bar",
             qty: 5
         });
@@ -174,6 +180,7 @@ describe('find the least popular products sold each week', function() {
     it('should tell the least popular products for week3', function() {
         var products = nelisaProducts.leastPopular(product3);
         assert.deepEqual(products, {
+            description: 'Least Popular Product',
             item: "Iwisa Pap 5kg",
             qty: 4
         });
@@ -182,6 +189,7 @@ describe('find the least popular products sold each week', function() {
     it('should tell the least popular products for week4', function() {
         var products = nelisaProducts.leastPopular(product4);
         assert.deepEqual(products, {
+            description: 'Least Popular Product',
             item: "Shampoo 1 litre",
             qty: 13
         });
@@ -231,6 +239,7 @@ describe('find the most popular category sold each week', function() {
     it('should tell the most popular category sold for week1', function() {
         var products = nelisaProducts.category(product1);
         assert.deepEqual(products, {
+          description: 'Most Popular category'
             category: 'Drinks',
             quantity: 109
         });
@@ -239,6 +248,7 @@ describe('find the most popular category sold each week', function() {
     it('should tell the most popular category sold for week2', function() {
         var products = nelisaProducts.category(product2);
         assert.deepEqual(products, {
+          description: 'Most Popular category',
             category: 'Drinks',
             quantity: 87
         });
@@ -247,6 +257,7 @@ describe('find the most popular category sold each week', function() {
     it('the most popular category sold for week3', function() {
         var products = nelisaProducts.category(product3);
         assert.deepEqual(products, {
+          description: 'Most Popular category',
             category: 'Dairy',
             quantity: 53
         });
@@ -255,6 +266,7 @@ describe('find the most popular category sold each week', function() {
     it('the most popular category sold for week4', function() {
         var products = nelisaProducts.category(product4);
         assert.deepEqual(products, {
+          description: 'Most Popular category',
             category: 'Grains',
             quantity: 92
         });
@@ -265,6 +277,7 @@ describe('find the least popular category sold each week', function() {
     it('find the least popular category sold for week1', function() {
         var products = nelisaProducts.least(one);
         assert.deepEqual(products, {
+          description: 'Least Popular category',
             category: 'Personal Care',
             quantity: 15
         });
@@ -272,14 +285,15 @@ describe('find the least popular category sold each week', function() {
     it('find the least popular category sold for week2', function() {
         var products = nelisaProducts.least(two);
         assert.deepEqual(products, {
+            description: 'Least Popular category',
             category: 'Personal Care',
             quantity: 11
         })
     });
     it('find the least popular category sold for week3', function() {
         var products = nelisaProducts.least(three);
-        // console.log(products);
         assert.deepEqual(products, {
+            description: 'Least Popular category',
             category: 'canned',
             quantity: 8
         });
@@ -287,6 +301,7 @@ describe('find the least popular category sold each week', function() {
     it('find the least popular category sold for week4', function() {
         var products = nelisaProducts.least(four);
         assert.deepEqual(products, {
+            description: 'Least Popular category',
             category: 'Canned',
             quantity: 33
         });

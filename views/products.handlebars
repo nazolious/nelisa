@@ -1,0 +1,25 @@
+<h1>products</h1>
+<a href="/products/add">Add</a>
+<div class="container">
+
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>product</th>
+                <th>category</th>
+                <th>Edit</th>
+                <th>DELETE</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#products}}
+                <tr>
+                    <td>{{product}}</td>
+                    <td>{{category}}</td>
+                    <td><a href="/products/edit/{{product_id}}">Edit</a></td>
+                  <td><a href="/products/delete/{{product_id}}">Delete</a></td>
+                </tr>
+            {{/products}}
+        </tbody>
+    </table>
+</div>

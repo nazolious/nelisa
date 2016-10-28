@@ -41,6 +41,7 @@ exports.mostPopular = function(productTotal) {
         if (productTotal[key] > most) {
             most = productTotal[key];
             mostProduct = {
+              description: 'Most Popular Product',
                 item: key,
                 qty: most
             }
@@ -59,6 +60,7 @@ exports.leastPopular = function(productTotal) {
         if (productTotal[key] < least) {
             least = productTotal[key];
             leastProduct = {
+              description: 'Least Popular Product',
                 item: key,
                 qty: least
             }
@@ -99,7 +101,7 @@ exports.category = function(productTotal) {
         }
         productCategory[food] += quantity;
     }
-    console.log(productCategory);
+    // console.log(productCategory);
 
     var max = 0;
     var mostCategory = {};
@@ -107,6 +109,7 @@ exports.category = function(productTotal) {
         if (productCategory[key] > max) {
             max = productCategory[key];
             mostCategory = {
+              description: 'Most Popular category',
                 category: key,
                 quantity: max
             }
@@ -122,6 +125,7 @@ exports.least = function(productCategory){
     if (productCategory[key] < min) {
     min = productCategory[key];
     leastCategory = {
+      description: 'Least Popular category',
       category: key,
       quantity: min
     }
