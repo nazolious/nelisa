@@ -1,14 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <style>
-body{
-  background: url("Khayelitsha, image Shaen Adey.jpg")no-repeat;
-}
-  </style>
-  <body>
-  </body>
-</html>
+
+            <p> WELCOME TO NELISA'S SPAZA SHOP</p>
+            <h1>Welcome!</h1>
+
+            {{#if user}}
+                Hello, {{user}}
+            {{/if}}
+
+            <h2>You should only see this page if you are logged in!</h2>
+
+            <h3>And this message if you are an admin user</h3>
+
+            Welcome admin user!
+
+
+            <h3>You should be able to logout of the app</h3>
+            <a href="/logout">Logout</a>

@@ -42,7 +42,7 @@ exports.get = function(req, res, next){
 	req.getConnection(function(err, connection){
 		connection.query('SELECT * FROM products', [id], function(err, products){
 			if(err) return next(err);
-			connection.query('SELECT * FROM purchases WHERE id = ?', [id], function(err,sales){
+			connection.query('SELECT * FROM purchases WHERE id = ?', [id], function(err,purchases){
 				if(err) return next(err);
 				var purchases = purchases[0];
 				products = products.map(function(product){
@@ -74,4 +74,13 @@ exports.update = function(req, res, next){
       		res.redirect('/purchases');
 		});
     });
+};
+exports.delete = function(req, res, next){
+	var id = req.params.id;
+	req.getConnection(function(err, connection){
+		connection.query('DELETE FROM purchases WHERE id = ?', [id], function(err,rows){
+			if(err) return next(err);
+			res.redirect('/purchases');
+		});
+	});
 };
