@@ -61,7 +61,7 @@ var getWeeklySales = function(week) {
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-<<<<<<< HEAD
+
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
