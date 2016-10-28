@@ -13,7 +13,7 @@ exports.sales = function(filePath) {
         var result = {
             Shop: shops,
             dates: dates,
-            Items: items,
+            items: items,
             Cost: Cost
         };
         newPurchase.push(result);
@@ -59,6 +59,7 @@ exports.splittingPurchases = function(newPurchase) {
 exports.groupPurchasing = function(purchasesMap, week) {
 
     var weekPurchases = {};
+<<<<<<< HEAD
     purchasesMap[week].forEach(function(gain) {
       // console.log();
         var Items = gain.Items;
@@ -68,11 +69,22 @@ exports.groupPurchasing = function(purchasesMap, week) {
         }
     })
     // console.log(weekPurchases);
+=======
+    array1.forEach(function(gain) {
+            var items = gain.items;
+            var Cost = gain.Cost;
+            if (!weekPurchases.hasOwnProperty(items)) {
+                weekPurchases[items] = Cost;
+            }
+        })
+        console.log(weekPurchases);
+>>>>>>> master
     return weekPurchases;
 }
 exports.qtySoldCost = function(weekPurchases, productTotal) {
     // group data for week//
     var quantitySold = {};
+<<<<<<< HEAD
     for (var key in productTotal) {
       var Items = productTotal[key].item;
       var quantity = productTotal[key].quantity;
@@ -85,6 +97,17 @@ exports.qtySoldCost = function(weekPurchases, productTotal) {
         }
 // console.log(quantitySold);
              //  take my purchases[profit]* [quantitySold]
+=======
+    productTotal.forEach(function(fruittee) {
+            var items = fruittee.item;
+            var quantity = fruittee.quantity;
+            if (!quantitySold.hasOwnProperty(items)) {
+                quantitySold[items] = 0;
+            }
+            quantitySold[items] += Number(quantity);
+        })
+        //         //  take my purchases[profit]* sales[quantitySold]
+>>>>>>> master
     var costQuantity = {};
     for (var Cost in weekPurchases) {
         var qty = quantitySold[Cost];

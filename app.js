@@ -1,4 +1,5 @@
- 'use strict';
+'use strict';
+
 var fs = require('fs');
 var handlebars = require('handlebars');
 var nelisaProducts = require('./nelisaProducts');
@@ -48,14 +49,19 @@ var getWeeklySales = function(week) {
     var dataWeek = {
         stats: [getData, leastData, mostCategory, leastCategory, getProfit, getCat]
     }
-
-    return dataWeek;
+    // var source = fs.readFileSync('./views/layouts/main.handlebars', 'utf-8');
+    //create template
+    // var template = handlebars.compile(source);
+    //combine the template + data
+    // var result = template(dataWeek);
+      // fs.writeFileSync(week +'_weekSales.html',result)
 
 };
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+<<<<<<< HEAD
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -155,7 +161,11 @@ app.get('/purchases/delete/:id', purchases.delete);
       res.render("login", {});
   });
 
-  //week static//
+app.get('/', function (req, res) {
+    res.render('home');
+  });
+
+
 app.get('/sales/:week_name', function(req, res) {
     var week = req.params.week_name;
     // var weekFile = './data/' + week + '.csv';
@@ -167,6 +177,8 @@ app.get('/sales/:week_name', function(req, res) {
 });
 
 app.set('port', (process.env.PORT || 3000));
+
+
 //start the app like this:
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));

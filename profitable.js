@@ -1,6 +1,7 @@
 var fs = require('fs');
 exports.findingProfit = function(salesWeek,purchases) {
     var profitability = {};
+
     for (var key in salesWeek) {
       var capital = salesWeek[key];
       var cost = purchases[key];
@@ -21,7 +22,8 @@ exports.findingProfit = function(salesWeek,purchases) {
   }
   // console.log(profitability);
   return profitability
-}
+};
+
 exports.mostProfit = function(profitability){
   var max = 0;
   var profit = {};
