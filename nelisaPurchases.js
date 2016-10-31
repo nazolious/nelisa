@@ -58,7 +58,7 @@ exports.splittingPurchases = function(newPurchase) {
 };
 exports.groupPurchasing = function(purchasesMap, week) {
 
-
+    var weekPurchases = {};
     purchasesMap[week].forEach(function(gain) {
       // console.log();
         var Items = gain.Items;
@@ -68,6 +68,7 @@ exports.groupPurchasing = function(purchasesMap, week) {
         }
     })
     // console.log(weekPurchases);
+
     return weekPurchases;
 }
 exports.qtySoldCost = function(weekPurchases, productTotal) {
