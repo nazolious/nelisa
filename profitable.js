@@ -1,8 +1,7 @@
 var fs = require('fs');
 exports.findingProfit = function(salesWeek,purchases) {
     var profitability = {};
-
-    for (var key in salesWeek) {
+  for (var key in salesWeek) {
       var capital = salesWeek[key];
       var cost = purchases[key];
   if (!profitability.hasOwnProperty(key)) {
