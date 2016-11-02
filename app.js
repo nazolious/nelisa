@@ -1,7 +1,7 @@
 'use strict';
 
 var fs = require('fs');
-var handlebars = require('handlebars');
+// var handlebars = require('handlebars');
 var nelisaProducts = require('./nelisaProducts');
 var nelisaPurchases = require('./nelisaPurchases');
 var mostCat = require('./mostCat');
