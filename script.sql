@@ -40,5 +40,10 @@ create table purchases (
     foreign key (product_id) references products(id)
     -- CONSTRAINT uc_id UNIQUE (id)
 );
+create table users (
+  id int primary key auto_increment,
+  username char(100) not null,
+  password char(100) not null
+)
 -- you can write a select query to check for data in a table
 -- select * from products;

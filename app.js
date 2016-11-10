@@ -16,6 +16,7 @@ var products = require('./routes/products');
 var categories = require('./routes/categories');
 var purchases = require('./routes/purchases');
 var sales = require('./routes/sales');
+var users = require('./routes/users');
 var session = require('express-session');
 
 var dbOptions = {
@@ -42,7 +43,7 @@ var getWeeklySales = function(week) {
     var weekPurchases = nelisaPurchases.groupPurchasing(purchasesMap, week);
     var purchases = nelisaPurchases.qtySoldCost(weekPurchases, productTotal);
     var salesWeek = nelisaPurchases.nelisaSold(productList);
-    var profitability = profitable.findingProfit(salesWeek, purchases);
+    var profitabilitusernamey = profitable.findingProfit(salesWeek, purchases);
     var getProfit = profitable.mostProfit(profitability);
     var getCat = mostCat.findingCategories(weekPurchases);
 
@@ -60,13 +61,8 @@ var getWeeklySales = function(week) {
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
 
-
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true
-}))
 // /setup middleware
 app.use(myConnection(mysql, dbOptions, 'single'));
 // parse application/x-www-form-urlencoded
@@ -79,58 +75,14 @@ function errorHandler(err, req, res, next) {
   res.render('error', { error: err });
 }
 
-//setup the handlers
+app.post('/', function(req, res) {
 
-app.get('/categories', categories.show);
-app.get('/categories/add', categories.showAdd);
-app.post('/categories/add', categories.add);
-app.get('/categories/edit/:id', categories.get);
-app.post('/categories/update/:id', categories.update);
-// //this should be a post but this is only an illustration of CRUD - not on good practices
-app.get('/categories/delete/:id', categories.delete);
+});
 
-app.get('/products', products.show);
-app.get('/products/add', products.showAdd);
-app.post('/products/add', products.add);
-app.get('/products/edit/:id', products.get);
-app.post('/products/update/:id', products.update);
-//this should be a post but this is only an illustration of CRUD - not on good practices
-app.get('/products/delete/:id', products.delete);
-
-app.get('/sales', sales.show);
-app.get('/sales/add', sales.showAdd);
-app.post('/sales/add', sales.add);
-app.get('/sales/edit/:id', sales.get);
-app.post('/sales/update/:id', sales.update);
-app.get('/sales/delete/:id', sales.delete);
-
-app.get('/purchases', purchases.show);
-app.get('/purchases/add', purchases.showAdd);
-app.post('/purchases/add', purchases.add);
-app.get('/purchases/edit/:id', purchases.get);
-app.post('/purchases/update/:id', purchases.update);
-app.get('/purchases/delete/:id', purchases.delete);
-
-
-  // var roles = {
-  //   "sinazo" : "Admin",
-  //   "Lee" : "viewer"
-  // }
-
-  // app.get('/home', function (req, res) {
-  //     res.render('home');
-  //   });
-  app.post('/', function(req, res) {
-
-  });
-  //
-  // app.get("/sign up", function(req, res){
-  //     res.render("/home")
-  // });
-
-  app.get("/", function(req, res){
-      res.redirect("/home");
-  });
+  var roles = {
+    "nelisa" : "admin",
+    "sinazo" : "viewer"
+  }
 
   var checkUser = function(req, res, next) {
     console.log('checkuser');
@@ -138,33 +90,81 @@ app.get('/purchases/delete/:id', purchases.delete);
       return next();
     }
     res.redirect("/login");
-
   }
+app.post('/signup', function(req, res){
+  req.session.user = "sinazo";
+  res.redirect('/login');
+})
+
   app.post("/login", function(req, res){
-    req.session.user = "sinazo",
-       res.redirect("/home");
-    })
-  // app.post("/login", function(req, res){
-  //   req.session.user = {
-  //     name : req.body.username,
-  //     is_Admin : roles[req.body.username] === "Admin"
-  //   res.redirect("/home");
-  // })
-  app.get("/home", checkUser, function(req, res){
-      res.render("home", {user : req.session.user});
+  var inputUser = {
+    name : req.body.username,
+    password : req.body.password,
+    is_admin : roles[req.body.username] === "admin"
+  }
+  req.getConnection(function(err, connection) {
+      if (err) return next(err);
+      connection.query('SELECT * from users where username = ?', [inputUser.name], function(err, results) {
+          if (err) return next(err);
+
+  if(results.length === 0){
+    console.log("failed");
+    res.redirect('/login');
+  }
+  else {
+    res.redirect('/home');
+  }
+});
   });
+});
+  app.get("/home", checkUser, function(req, res){
+    return res.render("home", {user : req.session.user});
+  });
+
   app.get('/logout', function (req, res) {
     delete req.session.user;
     res.redirect('login');
   })
+
+  app.get("/signup", function(req, res){
+      res.render("signup", {});
+  });
+
   app.get("/login", function(req, res){
       res.render("login", {});
   });
 
-app.get('/', function (req, res) {
-    res.render('home');
-  });
+  app.get('/categories', checkUser, categories.show);
+  app.get('/categories/add', checkUser, categories.showAdd);
+  app.post('/categories/add', checkUser, categories.add);
+  app.get('/categories/edit/:id', checkUser, categories.get);
+  app.post('/categories/update/:id', checkUser,categories.update);
+  // //this should be a post but this is only an illustration of CRUD - not on good practices
+  app.get('/categories/delete/:id', checkUser, categories.delete);
 
+  app.get('/products', checkUser, products.show);
+  app.get('/products/add', checkUser, products.showAdd);
+  app.post('/products/add', checkUser, products.add);
+  app.get('/products/edit/:id', checkUser, products.get);
+  app.post('/products/update/:id', checkUser, products.update);
+  //this should be a post but this is only an illustration of CRUD - not on good practices
+  app.get('/products/delete/:id', checkUser, products.delete);
+
+  app.get('/sales', checkUser, sales.show);
+  app.get('/sales/add', checkUser, sales.showAdd);
+  app.post('/sales/add', checkUser,sales.add);
+  app.get('/sales/edit/:id', checkUser, sales.get);
+  app.post('/sales/update/:id', checkUser, sales.update);
+  app.get('/sales/delete/:id', checkUser, sales.delete);
+
+  app.get('/purchases', checkUser, purchases.show);
+  app.get('/purchases/add', checkUser, purchases.showAdd);
+  app.post('/purchases/add', checkUser, purchases.add);
+  app.get('/purchases/edit/:id', checkUser, purchases.get);
+  app.post('/purchases/update/:id', checkUser, purchases.update);
+  app.get('/purchases/delete/:id', checkUser, purchases.delete);
+
+  app.get('/users', users.show);
 
 app.get('/sales/:week_name', function(req, res) {
     var week = req.params.week_name;
@@ -177,7 +177,6 @@ app.get('/sales/:week_name', function(req, res) {
 });
 
 app.set('port', (process.env.PORT || 3000));
-
 
 //start the app like this:
 app.listen(app.get('port'), function() {

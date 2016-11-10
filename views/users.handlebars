@@ -1,0 +1,23 @@
+<h1>users</h1>
+<a href="/sales/add">Add</a>
+<div class="container">
+
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+              <th>username</th>
+              <th>password</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#users}}
+                <tr>
+                    <td>{{username}}</td>
+                    <td>{{password}}</td>
+                    <!-- <td><a href="/sales/edit/{{sales_id}}">Edit</a></td>
+                  <td><a href="/sales/delete/{{sales_id}}">Delete</a></td> -->
+                </tr>
+            {{/users}}
+        </tbody>
+    </table>
+</div>
