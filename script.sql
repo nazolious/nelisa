@@ -43,6 +43,7 @@ create table purchases (
 create table users (
   id int primary key auto_increment,
   username char(100) not null,
+  email char(100) not null,
   password char(100) not null
 )
 -- you can write a select query to check for data in a table

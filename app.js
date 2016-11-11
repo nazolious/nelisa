@@ -15,9 +15,11 @@ var exphbs  = require('express-handlebars');
 var products = require('./routes/products');
 var categories = require('./routes/categories');
 var purchases = require('./routes/purchases');
+var signUp = require('./routes/signUp');
 var sales = require('./routes/sales');
 var users = require('./routes/users');
 var session = require('express-session');
+var bcrypt = require('bcrypt');
 
 var dbOptions = {
       host: 'localhost',
@@ -81,7 +83,7 @@ app.post('/', function(req, res) {
 
   var roles = {
     "nelisa" : "admin",
-    "sinazo" : "viewer"
+    "sinazo" : "user"
   }
 
   var checkUser = function(req, res, next) {
@@ -91,32 +93,14 @@ app.post('/', function(req, res) {
     }
     res.redirect("/login");
   }
-app.post('/signup', function(req, res){
-  req.session.user = "sinazo";
+app.post('/signUp', function(req, res, next){
+  if(req.body.username && req.body.email && req.body.password){
+
+  }
   res.redirect('/login');
 })
 
-  app.post("/login", function(req, res){
-  var inputUser = {
-    name : req.body.username,
-    password : req.body.password,
-    is_admin : roles[req.body.username] === "admin"
-  }
-  req.getConnection(function(err, connection) {
-      if (err) return next(err);
-      connection.query('SELECT * from users where username = ?', [inputUser.name], function(err, results) {
-          if (err) return next(err);
 
-  if(results.length === 0){
-    console.log("failed");
-    res.redirect('/login');
-  }
-  else {
-    res.redirect('/home');
-  }
-});
-  });
-});
   app.get("/home", checkUser, function(req, res){
     return res.render("home", {user : req.session.user});
   });
@@ -126,10 +110,13 @@ app.post('/signup', function(req, res){
     res.redirect('login');
   })
 
-  app.get("/signup", function(req, res){
-      res.render("signup", {});
+  app.get("/signUp", function(req, res){
+      res.render("signUp", {});
   });
 
+  app.get("/home", function(req, res){
+      res.render("home", {});
+  });
   app.get("/login", function(req, res){
       res.render("login", {});
   });
@@ -164,7 +151,8 @@ app.post('/signup', function(req, res){
   app.post('/purchases/update/:id', checkUser, purchases.update);
   app.get('/purchases/delete/:id', checkUser, purchases.delete);
 
-  app.get('/users', users.show);
+  // app.post('/users/add', users.show);
+  app.post('/signUp/add', users.add);
 
 app.get('/sales/:week_name', function(req, res) {
     var week = req.params.week_name;

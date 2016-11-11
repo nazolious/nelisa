@@ -6,12 +6,12 @@ var conn = mysql.createConnection({
  database : 'nelisa'
 
 });
-var sql = "INSERT INTO users (username,password) VALUES ?";
+var sql = "INSERT INTO users (username,email,password) VALUES ?";
 
 //create a list of lists
 var values = [
-    ['neli',321],
-    ['sinazo',123]
+    ['nelisa',"neli@mail.com",321],
+    ['sinazo',"sinazo@projectcodex.com",123]
 
 ];
 
