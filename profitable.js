@@ -19,9 +19,10 @@ exports.findingProfit = function(salesWeek,purchases) {
 
   }
   }
-  // console.log(profitability);
+
   return profitability
-}
+};
+
 exports.mostProfit = function(profitability){
   var max = 0;
   var profit = {};

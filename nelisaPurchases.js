@@ -13,7 +13,7 @@ exports.sales = function(filePath) {
         var result = {
             Shop: shops,
             dates: dates,
-            Items: items,
+            items: items,
             Cost: Cost
         };
         newPurchase.push(result);
@@ -59,6 +59,7 @@ exports.splittingPurchases = function(newPurchase) {
 exports.groupPurchasing = function(purchasesMap, week) {
 
     var weekPurchases = {};
+
     purchasesMap[week].forEach(function(gain) {
       // console.log();
         var Items = gain.Items;
@@ -67,7 +68,7 @@ exports.groupPurchasing = function(purchasesMap, week) {
             weekPurchases[Items] = Cost;
         }
     })
-    // console.log(weekPurchases);
+
     return weekPurchases;
 }
 exports.qtySoldCost = function(weekPurchases, productTotal) {
