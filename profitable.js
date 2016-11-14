@@ -5,12 +5,10 @@ exports.findingProfit = function(salesWeek,purchases) {
       var capital = salesWeek[key];
       var cost = purchases[key];
   if (!profitability.hasOwnProperty(key)) {
-
     var purchaseAmount = purchases[key];
     if (!purchaseAmount){
       purchaseAmount = 0;
     }
-
     var salesAmount = salesWeek[key];
     if(!salesAmount){
       salesAmount = 0;

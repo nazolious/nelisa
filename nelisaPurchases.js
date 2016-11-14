@@ -59,7 +59,6 @@ exports.splittingPurchases = function(newPurchase) {
 exports.groupPurchasing = function(purchasesMap, week) {
 
     var weekPurchases = {};
-
     purchasesMap[week].forEach(function(gain) {
       // console.log();
         var Items = gain.Items;

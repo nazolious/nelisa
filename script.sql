@@ -4,11 +4,14 @@ set foreign_key_checks=0;
 drop table if exists categories;
 drop table if exists products;
 drop table if exists sales;
+drop table if exists purchases;
 set foreign_key_checks=1;
 -- you can create tables in the script;
 create table categories(
     id int primary key auto_increment,
-    category char(100) not null
+    category char(100) not null,
+    CONSTRAINT uc_category UNIQUE (category)
+
 );
 
 create table products (
@@ -21,21 +24,21 @@ create table products (
 
 create table sales (
     id int primary key auto_increment,
-    dates char(100) not null,
+    date char(100) not null,
     qty int,
     salesPrice char(100) not null,
     product_id int,
-    foreign key (product_id) references products(id),
-    CONSTRAINT uc_id UNIQUE (id)
+    foreign key (product_id) references products(id)
+    -- CONSTRAINT uc_id UNIQUE (id)
 );
 create table purchases (
     id int primary key auto_increment,
-    dates char(100) not null,
+    date char(100) not null,
     qty int,
     cost char(100) not null,
     product_id int,
-    foreign key (product_id) references products(id),
-    CONSTRAINT uc_id UNIQUE (id)
+    foreign key (product_id) references products(id)
+    -- CONSTRAINT uc_id UNIQUE (id)
 );
 -- you can write a select query to check for data in a table
 -- select * from products;

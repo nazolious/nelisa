@@ -1,0 +1,26 @@
+<h1>Edit sales</h1>
+
+<form action="/sales/update/{{data.id}}" method="POST">
+	<div class="product">
+		<label for="">product</label>
+		<select class="" name="product_id">
+			{{#products}}
+				<option {{selected}} value="{{id}}">{{product}}</option>
+			{{/products}}
+		</select>
+	</div>
+	<div class="date">
+		<label for="date">date</label>
+		<input type="date" name="date" value="{{data.date}}">
+	</div>
+  <div class="qty">
+		<label for="qty">qty</label>
+		<input type="number" name="qty" value="{{data.qty}}">
+	</div>
+	<div class="salesPrice">
+		<label for="">salesPrice</label>
+		<input type="text" name="salesPrice" value="{{data.salesPrice}}">
+	</div>
+
+	<input type="submit">
+</form>

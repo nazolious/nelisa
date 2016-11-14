@@ -1,10 +1,25 @@
-<h1>Categories</h1>
+     <h1>Categories</h1>
 <a href="/categories/add">Add</a>
+<div class="container">
+
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>category</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
 {{#categories}}
-  <h2>{{category}}</h2>
-  <!-- <a href="/categories/edit/{{id}}">Edit</a> -->
-  <!-- <a href="/categories/delete/{{id}}">Delete</a> -->
+<tr>
+    <td>{{category}}</td>
+    <td><a href="/categories/edit/{{id}}">Edit</a></td>
+      <td><a href="/categories/delete/{{id}}">Delete</a></td>
+</tr>
 {{/categories}}
+</tbody>
+</table>
+</div>
 
 <!-- {{#no_products}}
   <p>No products available yet. Add some above.</p>
