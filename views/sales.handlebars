@@ -1,17 +1,22 @@
-<h1>sales</h1>
+<h1>SALES</h1>
+{{# if user.is_admin}}
 <a href="/sales/add">Add</a>
+{{else}}
+<a></a>
+{{/if}}
 <div class="container">
 
     <table class="table table-condensed">
         <thead>
             <tr>
-              <th>date</th>
+              <th>Date</th>
               <th>product</th>
               <th>qty</th>
               <th>salesPrice</th>
+              {{# is_admin}}
               <th>Edit</th>
               <th>DELETE</th>
-
+              {{/is_admin}}
             </tr>
         </thead>
         <tbody>
@@ -21,8 +26,12 @@
                     <td>{{product}}</td>
                       <td>{{qty}}</td>
                     <td>{{salesPrice}}</td>
+                    {{# if user.is_admin}}
                     <td><a href="/sales/edit/{{sales_id}}">Edit</a></td>
                   <td><a href="/sales/delete/{{sales_id}}">Delete</a></td>
+                  {{else}}
+                  <td></td>
+                  {{/if}}
                 </tr>
             {{/sales}}
         </tbody>

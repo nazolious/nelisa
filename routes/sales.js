@@ -5,6 +5,8 @@ exports.show = function(req, res, next) {
             if (err) return next(err);
             res.render('sales', {
                 sales: results,
+                user : req.session.user,
+                is_admin : req.session.is_admin
             });
         });
     });

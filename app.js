@@ -29,12 +29,7 @@ var dbOptions = {
     port: 3306,
     database: 'nelisa'
 };
-app.use(session({
-    secret: 'keyboard cat',
-    cookie: {
-        maxAge: 60000
-    }
-}))
+
 var getWeeklySales = function(week) {
     //var week = process.argv[2]
     var filePath = './data/' + week + '.csv'
@@ -71,7 +66,12 @@ app.engine('handlebars', exphbs({
     defaultLayout: 'main'
 }));
 app.set('view engine', 'handlebars');
-
+app.use(session({
+    secret: 'keyboard cat',
+    cookie: {
+        maxAge: 60000
+    }
+}))
 
 // /setup middleware
 app.use(myConnection(mysql, dbOptions, 'single'));
@@ -101,39 +101,45 @@ var checkUser = function(req, res, next) {
 
 var roles = {
     "nelisa": "admin",
-    "sinazo": "user"
+    "sinazo": "user",
+    "amani" : "admin"
 }
 app.get("/users", function(req, res) {
     res.render("users");
 })
 
 app.post("/login", function(req, res, next) {
-    var inputUser = {
-        username: req.body.username,
-        password: req.body.password,
-        is_admin: roles[req.body.username] === "admin"
-    }
-
-    // console.log(user1);
-
     req.getConnection(function(err, connection) {
+      var inputUser = {
+          username: req.body.username,
+          password: req.body.password,
+          is_admin: roles[req.body.username] === "admin"
+      }
+
         if (err) return next(err);
         connection.query('SELECT * from users where username = ?', [inputUser.username], function(err, results) {
             if (err) return next(err);
 
-            console.log(results);
-            if(results.length === 1){
-              req.session.user = inputUser
-              return res.redirect('/home');
+            if ( results.length === 0) {
+            return res.redirect('/login');
+          }
+          else {
+            var dbUser = results[0];
+            bcrypt.compare(inputUser.password, dbUser.password, function(err, match) {
+              if (match) {
+                req.session.user = inputUser
+                  return res.redirect('/home');
+              }
+              else {
+                return res.redirect("/login");
+              }
 
-            }
-            else {
-              (results.length === 0)
-              res.redirect('/login');
-            }
+            });
 
-        });
+
+        }
   });
+});
 });
 
 app.get("/home", checkUser, function(req, res) {

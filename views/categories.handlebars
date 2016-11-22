@@ -1,26 +1,39 @@
-     <h1>Categories</h1>
-<a href="/categories/add">Add</a>
-<div class="container">
+<h1>CATEGORY</h1>
+{{# if user.is_admin}}
+    <a href="/categories/add">Add</a>
+    {{else}}
+        <a></a>
+        {{/if}}
+        <div class="container">
 
-    <table class="table table-condensed">
-        <thead>
-            <tr>
-                <th>category</th>
-                <th>Edit</th>
-            </tr>
-        </thead>
-        <tbody>
-{{#categories}}
-<tr>
-    <td>{{category}}</td>
-    <td><a href="/categories/edit/{{id}}">Edit</a></td>
-      <td><a href="/categories/delete/{{id}}">Delete</a></td>
-</tr>
-{{/categories}}
-</tbody>
-</table>
-</div>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>category</th>
+                        {{# if user.is_admin}}
+                            <th>Edit</th>
+                            <th>delete</th>
+                            {{else}}
+                                <td></td>
+                                {{/if}}
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#categories}}
+                        <tr>
+                            <td>{{category}}</td>
+                            {{# if user.is_admin}}
+                                <td><a href="/categories/edit/{{id}}">Edit</a></td>
+                                <td><a href="/categories/delete/{{id}}">Delete</a></td>
+                                {{else}}
+                                    <td></td>
+                                    {{/if}}
+                        </tr>
+                    {{/categories}}
+                </tbody>
+            </table>
+        </div>
 
-<!-- {{#no_products}}
+        <!-- {{#no_products}}
   <p>No products available yet. Add some above.</p>
 {{/no_products}} -->

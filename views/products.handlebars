@@ -1,25 +1,37 @@
-<h1>products</h1>
-<a href="/products/add">Add</a>
-<div class="container">
+<h1>PRODUCTS</h1>
+{{# if user.is_admin}}
+    <a href="/products/add">Add</a>
+    {{else}}
+        <a></a>
+        {{/if}}
+        <div class="container">
 
-    <table class="table table-condensed">
-        <thead>
-            <tr>
-                <th>product</th>
-                <th>category</th>
-                <th>Edit</th>
-                <th>DELETE</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#products}}
-                <tr>
-                    <td>{{product}}</td>
-                    <td>{{category}}</td>
-                    <td><a href="/products/edit/{{product_id}}">Edit</a></td>
-                  <td><a href="/products/delete/{{product_id}}">Delete</a></td>
-                </tr>
-            {{/products}}
-        </tbody>
-    </table>
-</div>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>product</th>
+                        <th>category</th>
+                        {{# if user.is_admin}}
+                            <th>Edit</th>
+                            <th>DELETE</th>
+                            {{else}}
+                                <td></td>
+                                {{/if}}
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#products}}
+                        <tr>
+                            <td>{{product}}</td>
+                            <td>{{category}}</td>
+                            {{# if user.is_admin}}
+                                <td><a href="/products/edit/{{product_id}}">Edit</a></td>
+                                <td><a href="/products/delete/{{product_id}}">Delete</a></td>
+                                {{else}}
+                                    <td></td>
+                                    {{/if}}
+                        </tr>
+                    {{/products}}
+                </tbody>
+            </table>
+        </div>

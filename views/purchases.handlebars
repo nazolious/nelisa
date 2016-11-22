@@ -1,5 +1,9 @@
-<h1>purchases</h1>
+                                <h1>PURCHASES</h1>
+{{# if user.is_admin}}
 <a href="/purchases/add">Add</a>
+{{else}}
+<a></a>
+{{/if}}
 <div class="container">
 
     <table class="table table-condensed">
@@ -9,8 +13,12 @@
                 <th>product</th>
                 <th>qty</th>
                 <th>cost</th>
+                {{# if user.is_admin}}
                 <th>Edit</th>
                 <th>DELETE</th>
+                {{else}}
+                <td></td>
+                {{/if}}
             </tr>
         </thead>
         <tbody>
@@ -21,8 +29,12 @@
     <td>{{product}}</td>
     <td>{{qty}}</td>
     <td>{{cost}}</td>
+    {{# if user.is_admin}}
     <td><a href="/purchases/edit/{{purchases_id}}">Edit</a></td>
     <td><a href="/purchases/delete/{{purchases_id}}">DELETE</a></td>
+    {{else}}
+    <td></td>
+    {{/if}}
 </tr>
 {{/purchases}}
 </tbody>
