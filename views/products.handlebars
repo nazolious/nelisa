@@ -24,13 +24,14 @@
                         <tr>
                             <td>{{product}}</td>
                             <td>{{category}}</td>
-                            {{# if user.is_admin}}
-                                <td><a href="/products/edit/{{product_id}}">Edit</a></td>
-                                <td><a href="/products/delete/{{product_id}}">Delete</a></td>
+                            {{# if ../is_admin}}
+                                <td><button type="button" class="btn btn-warning"><a href="/products/edit/{{product_id}}">EDIT</a></button></a></td>
+                                <td><button type="button" class="btn btn-warning"><a href="/products/delete/{{product_id}}">DELETE</a></button></a></td>
                                 {{else}}
                                     <td></td>
                                     {{/if}}
-                        </tr>
+                                  </tr>
+
                     {{/products}}
                 </tbody>
             </table>

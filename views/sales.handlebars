@@ -13,10 +13,10 @@
               <th>product</th>
               <th>qty</th>
               <th>salesPrice</th>
-              {{# is_admin}}
+              {{# if user.is_admin}}
               <th>Edit</th>
               <th>DELETE</th>
-              {{/is_admin}}
+              {{/if}}
             </tr>
         </thead>
         <tbody>
@@ -26,9 +26,10 @@
                     <td>{{product}}</td>
                       <td>{{qty}}</td>
                     <td>{{salesPrice}}</td>
-                    {{# if user.is_admin}}
-                    <td><a href="/sales/edit/{{sales_id}}">Edit</a></td>
-                  <td><a href="/sales/delete/{{sales_id}}">Delete</a></td>
+                    {{# if ../user.is_admin}}
+                    <td><button type="button" class="btn btn-warning"><a href="/sales/edit/{{sales_id}}">EDIT</a></button></a></td>
+                    <td><button type="button" class="btn btn-warning"><a href="/sales/delete/{{sales_id}}">DELETE</a></button></a></td>
+                  <td></td>
                   {{else}}
                   <td></td>
                   {{/if}}

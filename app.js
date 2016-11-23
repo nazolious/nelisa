@@ -19,7 +19,7 @@ var signUp = require('./routes/signUp');
 var sales = require('./routes/sales');
 var users = require('./routes/users');
 var session = require('express-session');
-// var login = require('./routes/login');
+var flash = require('express-flash');
 var bcrypt = require('bcrypt');
 
 var dbOptions = {

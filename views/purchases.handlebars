@@ -29,9 +29,10 @@
     <td>{{product}}</td>
     <td>{{qty}}</td>
     <td>{{cost}}</td>
-    {{# if user.is_admin}}
+    {{# if ../user.is_admin}}
     <td><a href="/purchases/edit/{{purchases_id}}">Edit</a></td>
     <td><a href="/purchases/delete/{{purchases_id}}">DELETE</a></td>
+    <td></td>
     {{else}}
     <td></td>
     {{/if}}

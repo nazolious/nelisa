@@ -17,7 +17,9 @@ exports.showAdd = function(req, res){
 		connection.query('SELECT * from products', [], function(err, products) {
         	if (err) return next(err);
     		res.render( 'add_purchases', {
-					products : products
+					products : products,
+					user : req.session.user,
+					is_admin : req.session.user.is_admin
     		});
       	});
 	});
@@ -52,7 +54,9 @@ exports.get = function(req, res, next){
 				});
 				res.render('edit_purchases', {
 					products : products,
-					data : purchases
+					data : purchases,
+					user : req.session.user,
+					is_admin : req.session.user.is_admin
 				});
 			});
 		});

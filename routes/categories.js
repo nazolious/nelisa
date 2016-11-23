@@ -14,7 +14,8 @@ exports.show = function (req, res, next) {
 };
 
 exports.showAdd = function(req, res){
-	res.render('add_category');
+	res.render('add_category', {user : req.session.user,
+		is_admin : req.session.user.is_admin});
 }
 
 exports.add = function (req, res, next) {
@@ -38,7 +39,9 @@ exports.get = function(req, res, next){
 	req.getConnection(function(err, connection){
 		connection.query('SELECT * FROM categories WHERE id = ?', [id], function(err,rows){
 			if(err) return next(err);
-			res.render('edit_category',{page_title:"Edit Customers - Node.js", data : rows[0]});
+			res.render('edit_category',{page_title:"Edit Customers - Node.js", data : rows[0],
+				user : req.session.user,
+				is_admin : req.session.user.is_admin});
 		});
 	});
 };
