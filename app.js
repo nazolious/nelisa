@@ -69,7 +69,7 @@ app.set('view engine', 'handlebars');
 app.use(session({
     secret: 'keyboard cat',
     cookie: {
-        maxAge: 60000
+        maxAge: 60000 * 60
     }
 }))
 

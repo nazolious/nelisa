@@ -1,18 +1,18 @@
 <h1>PRODUCTS</h1>
 {{# if user.is_admin}}
-    <a href="/products/add">Add</a>
+    <button type="button" class="btn btn-warning"><a href="/products/add">ADD</a></button>
     {{else}}
         <a></a>
         {{/if}}
         <div class="container">
 
-            <table class="table table-condensed">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>product</th>
-                        <th>category</th>
+                        <th>PRODUCT</th>
+                        <th>CATEGORY</th>
                         {{# if user.is_admin}}
-                            <th>Edit</th>
+                            <th>EDIT</th>
                             <th>DELETE</th>
                             {{else}}
                                 <td></td>
@@ -26,7 +26,7 @@
                             <td>{{category}}</td>
                             {{# if ../is_admin}}
                                 <td><button type="button" class="btn btn-warning"><a href="/products/edit/{{product_id}}">EDIT</a></button></a></td>
-                                <td><button type="button" class="btn btn-warning"><a href="/products/delete/{{product_id}}">DELETE</a></button></a></td>
+                                <td><button type="button" class="btn btn-danger"><a href="/products/delete/{{product_id}}">DELETE</a></button></a></td>
                                 {{else}}
                                     <td></td>
                                     {{/if}}

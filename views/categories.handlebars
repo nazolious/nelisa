@@ -1,16 +1,15 @@
 <h1>CATEGORY</h1>
-    <a href="/categories/add">Add</a>
+    <button type="button" class="btn btn-warning"><a href="/categories/add">ADD</a></button>
     <a></a>
         <div class="container">
 
-            <table class="table table-condensed">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>category</th>
+                        <th>CATEGORY</th>
                         {{#if user.is_admin}}
-                            <th>Edit</th>
-                            <th>delete</th>
-                            <th></th>
+                            <th>EDIT</th>
+                            <th>DELETE</th>
                             {{else}}
                             <th></th>
                             {{/if}}
@@ -24,7 +23,7 @@
                             <td><button type="button" class="btn btn-warning"><a href="/categories/edit/{{id}}">EDIT</a></button></td>
                             <td><button type="button" class="btn btn-danger"><a href="/categories/delete/{{id}}">DELETE</a></button></td>
 
-                            <td></td>
+                            <!-- <td></td> -->
                             {{else}}
                             <td></td>
                             {{/if}}
