@@ -1,26 +1,38 @@
-     <h1>Categories</h1>
-<a href="/categories/add">Add</a>
-<div class="container">
+<h1>CATEGORY</h1>
+    <button type="button" class="btn btn-warning"><a href="/categories/add">ADD</a></button>
+    <a></a>
+        <div class="container">
 
-    <table class="table table-condensed">
-        <thead>
-            <tr>
-                <th>category</th>
-                <th>Edit</th>
-            </tr>
-        </thead>
-        <tbody>
-{{#categories}}
-<tr>
-    <td>{{category}}</td>
-    <td><a href="/categories/edit/{{id}}">Edit</a></td>
-      <td><a href="/categories/delete/{{id}}">Delete</a></td>
-</tr>
-{{/categories}}
-</tbody>
-</table>
-</div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>CATEGORY</th>
+                        {{#if user.is_admin}}
+                            <th>EDIT</th>
+                            <th>DELETE</th>
+                            {{else}}
+                            <th></th>
+                            {{/if}}
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#categories}}
+                        <tr>
+                            <td>{{category}}</td>
+                            {{#if ../user.is_admin}}
+                            <td><button type="button" class="btn btn-warning"><a href="/categories/edit/{{id}}">EDIT</a></button></td>
+                            <td><button type="button" class="btn btn-danger"><a href="/categories/delete/{{id}}">DELETE</a></button></td>
 
-<!-- {{#no_products}}
+                            <!-- <td></td> -->
+                            {{else}}
+                            <td></td>
+                            {{/if}}
+                        </tr>
+                    {{/categories}}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- {{#no_products}}
   <p>No products available yet. Add some above.</p>
 {{/no_products}} -->

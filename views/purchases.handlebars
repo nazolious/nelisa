@@ -1,16 +1,24 @@
-<h1>purchases</h1>
-<a href="/purchases/add">Add</a>
+                                <h1>PURCHASES</h1>
+{{# if user.is_admin}}
+<button type="button" class="btn btn-warning"><a href="/purchases/add">ADD</a></button>
+{{else}}
+<a></a>
+{{/if}}
 <div class="container">
 
-    <table class="table table-condensed">
+    <table class="table table-bordered">
         <thead>
             <tr>
-                <th>date</th>
-                <th>product</th>
-                <th>qty</th>
-                <th>cost</th>
-                <th>Edit</th>
+                <th>DATE</th>
+                <th>PRODUCT</th>
+                <th>QTY</th>
+                <th>COST</th>
+                {{# if user.is_admin}}
+                <th>EDIT</th>
                 <th>DELETE</th>
+                {{else}}
+                <td></td>
+                {{/if}}
             </tr>
         </thead>
         <tbody>
@@ -21,8 +29,13 @@
     <td>{{product}}</td>
     <td>{{qty}}</td>
     <td>{{cost}}</td>
-    <td><a href="/purchases/edit/{{purchases_id}}">Edit</a></td>
-    <td><a href="/purchases/delete/{{purchases_id}}">DELETE</a></td>
+    {{# if ../user.is_admin}}
+    <td><button type="button" class="btn btn-warning"><a href="/products/edit/{{product_id}}">EDIT</a></button></a></td>
+    <td><button type="button" class="btn btn-danger"><a href="/products/delete/{{product_id}}">DELETE</a></button></a></td>
+    <!-- <td></td> -->
+    {{else}}
+    <td></td>
+    {{/if}}
 </tr>
 {{/purchases}}
 </tbody>

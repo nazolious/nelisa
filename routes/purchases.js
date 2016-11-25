@@ -4,8 +4,9 @@ exports.show = function (req, res, next) {
 		connection.query('SELECT purchases.id as purchases_id, products.product, purchases.qty, purchases.date, purchases.cost FROM products inner join purchases on purchases.product_id = products.id ORDER BY date ASC', [], function(err, results) {
         	if (err) return next(err);
     		res.render('purchases', {
-					// no_products : results.length === 0,
 					purchases : results,
+					user : req.session.user,
+					is_admin : req.session.is_admin
     		});
       	});
 	});
@@ -16,7 +17,9 @@ exports.showAdd = function(req, res){
 		connection.query('SELECT * from products', [], function(err, products) {
         	if (err) return next(err);
     		res.render( 'add_purchases', {
-					products : products
+					products : products,
+					user : req.session.user,
+					is_admin : req.session.user.is_admin
     		});
       	});
 	});
@@ -51,7 +54,9 @@ exports.get = function(req, res, next){
 				});
 				res.render('edit_purchases', {
 					products : products,
-					data : purchases
+					data : purchases,
+					user : req.session.user,
+					is_admin : req.session.user.is_admin
 				});
 			});
 		});
