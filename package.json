@@ -7,11 +7,14 @@
     "test": "test"
   },
   "dependencies": {
+    "body-parser": "^1.9.2",
     "express": "~4.14.0",
     "express-handlebars": "~3.0.0",
-    "body-parser": "^1.9.2",
     "express-myconnection": "^1.0.4",
-    "mysql": "~2.11.1"
+    "express-session": "^1.14.2",
+    "handlebars": "^4.0.5",
+    "mysql": "~2.11.1",
+    "nodemon": "^1.11.0"
   },
   "devDependencies": {},
   "scripts": {
